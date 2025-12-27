@@ -42,7 +42,7 @@ Portfolio/
 
 ## 📬 Contact
 - **GitHub:** [HimanshuHeda](https://github.com/HimanshuHeda)
-- **LinkedIn:** [Your LinkedIn](https://www.linkedin.com/in/your-profile)
+- **LinkedIn:** [Your LinkedIn](https://www.linkedin.com/in/himanshu-heda/)
 - **Email:** himanshuheda123@gmail.com
 
 ## 🏆 Acknowledgments

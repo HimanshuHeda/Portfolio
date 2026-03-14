@@ -127,6 +127,7 @@ for (let i = 0; i < filterBtn.length; i++) {
 const form = document.querySelector("[data-form]");
 const formInputs = document.querySelectorAll("[data-form-input]");
 const formBtn = document.querySelector("[data-form-btn]");
+const formStatus = document.querySelector("[data-form-status]");
 
 // add event to all form input field
 for (let i = 0; i < formInputs.length; i++) {
@@ -139,6 +140,47 @@ for (let i = 0; i < formInputs.length; i++) {
       formBtn.setAttribute("disabled", "");
     }
 
+  });
+}
+
+// handle form submission via Formspree (AJAX — no page redirect)
+if (form) {
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    formBtn.setAttribute("disabled", "");
+    formBtn.querySelector("span").textContent = "Sending…";
+
+    try {
+      const response = await fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { "Accept": "application/json" }
+      });
+
+      if (response.ok) {
+        formStatus.textContent = "Message sent successfully! I will get back to you soon.";
+        formStatus.style.color = "hsl(120, 60%, 65%)";
+        form.reset();
+        formBtn.setAttribute("disabled", "");
+        formBtn.querySelector("span").textContent = "Send Message";
+      } else {
+        const data = await response.json();
+        const msg = data.errors ? data.errors.map(e => e.message).join(", ") : "Something went wrong. Please try again.";
+        formStatus.textContent = msg;
+        formStatus.style.color = "hsl(0, 60%, 65%)";
+        formBtn.removeAttribute("disabled");
+        formBtn.querySelector("span").textContent = "Send Message";
+      }
+    } catch (err) {
+      formStatus.textContent = "Network error. Please try again later.";
+      formStatus.style.color = "hsl(0, 60%, 65%)";
+      formBtn.removeAttribute("disabled");
+      formBtn.querySelector("span").textContent = "Send Message";
+    }
+
+    formStatus.style.display = "block";
+    setTimeout(() => { formStatus.style.display = "none"; }, 6000);
   });
 }
 

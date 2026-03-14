@@ -2291,4 +2291,290 @@ textarea.form-input::-webkit-resizer {
   border-left-color: var(--orange-yellow-crayola);
 }
 
+
+
+
+/*-----------------------------------*\
+  #ANIMATIONS
+\*-----------------------------------*/
+
+
+/**
+ * New keyframes
+ */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes popIn {
+  0%   { opacity: 0; transform: scale(0.6); }
+  70%  { opacity: 1; transform: scale(1.08); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes typewriter {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0% 0 0); }
+}
+
+@keyframes cursorBlink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+
+/**
+ * Typewriter — "Full Stack Developer"
+ * "Full Stack Developer" = 20 characters incl. spaces → steps(20, end)
+ * Cursor appears after typing completes and blinks 6 times then disappears
+ */
+
+.info-content .title {
+  animation: typewriter 1.6s steps(20, end) 0.5s both;
+}
+
+.info-content .title::after {
+  content: " |";
+  color: var(--orange-yellow-crayola);
+  font-weight: var(--fw-300);
+  animation: cursorBlink 0.6s step-end 6 both;
+  animation-delay: 2.1s;
+}
+
+
+/**
+ * Sidebar — page-load entrance (one-time, no .active wrapper)
+ */
+
+.sidebar {
+  animation: slideDown 0.6s ease both;
+}
+
+.avatar-box {
+  animation: popIn 0.5s ease both;
+  animation-delay: 0.2s;
+}
+
+.info-content .name {
+  animation: fadeUp 0.4s ease both;
+  animation-delay: 0.3s;
+}
+
+/* Contact items */
+.contact-item                 { animation: slideInLeft 0.35s ease both; }
+.contact-item:nth-child(1)    { animation-delay: 0.10s; }
+.contact-item:nth-child(2)    { animation-delay: 0.18s; }
+.contact-item:nth-child(3)    { animation-delay: 0.26s; }
+.contact-item:nth-child(4)    { animation-delay: 0.34s; }
+.contact-item:nth-child(5)    { animation-delay: 0.42s; }
+
+/* Social icons */
+.social-item                  { animation: popIn 0.3s ease both; }
+.social-item:nth-child(1)     { animation-delay: 0.10s; }
+.social-item:nth-child(2)     { animation-delay: 0.17s; }
+.social-item:nth-child(3)     { animation-delay: 0.24s; }
+.social-item:nth-child(4)     { animation-delay: 0.31s; }
+.social-item:nth-child(5)     { animation-delay: 0.38s; }
+
+
+/**
+ * About tab — staggered entrance
+ */
+
+article[data-page="about"].active .about-text p {
+  animation: fadeUp 0.4s ease both;
+}
+article[data-page="about"].active .about-text p:nth-child(1) { animation-delay: 0.05s; }
+article[data-page="about"].active .about-text p:nth-child(2) { animation-delay: 0.10s; }
+article[data-page="about"].active .about-text p:nth-child(3) { animation-delay: 0.15s; }
+article[data-page="about"].active .about-text p:nth-child(4) { animation-delay: 0.20s; }
+article[data-page="about"].active .about-text p:nth-child(5) { animation-delay: 0.25s; }
+article[data-page="about"].active .about-text p:nth-child(6) { animation-delay: 0.30s; }
+article[data-page="about"].active .about-text p:nth-child(7) { animation-delay: 0.35s; }
+article[data-page="about"].active .about-text p:nth-child(8) { animation-delay: 0.40s; }
+article[data-page="about"].active .about-text p:nth-child(9) { animation-delay: 0.45s; }
+
+article[data-page="about"].active .service-item {
+  animation: fadeUp 0.4s ease both;
+}
+article[data-page="about"].active .service-item:nth-child(1) { animation-delay: 0.05s; }
+article[data-page="about"].active .service-item:nth-child(2) { animation-delay: 0.15s; }
+article[data-page="about"].active .service-item:nth-child(3) { animation-delay: 0.25s; }
+article[data-page="about"].active .service-item:nth-child(4) { animation-delay: 0.35s; }
+
+/* nth-child resets per <ul>, so this covers both Certifications and Badges lists */
+article[data-page="about"].active .clients-item {
+  animation: popIn 0.3s ease both;
+}
+article[data-page="about"].active .clients-item:nth-child(1) { animation-delay: 0.05s; }
+article[data-page="about"].active .clients-item:nth-child(2) { animation-delay: 0.10s; }
+article[data-page="about"].active .clients-item:nth-child(3) { animation-delay: 0.15s; }
+article[data-page="about"].active .clients-item:nth-child(4) { animation-delay: 0.20s; }
+article[data-page="about"].active .clients-item:nth-child(5) { animation-delay: 0.25s; }
+article[data-page="about"].active .clients-item:nth-child(6) { animation-delay: 0.30s; }
+article[data-page="about"].active .clients-item:nth-child(7) { animation-delay: 0.35s; }
+
+
+/**
+ * Resume tab — staggered entrance
+ */
+
+article[data-page="resume"].active .timeline-item {
+  animation: slideInLeft 0.35s ease both;
+}
+article[data-page="resume"].active .timeline-item:nth-child(1) { animation-delay: 0.05s; }
+article[data-page="resume"].active .timeline-item:nth-child(2) { animation-delay: 0.10s; }
+article[data-page="resume"].active .timeline-item:nth-child(3) { animation-delay: 0.15s; }
+article[data-page="resume"].active .timeline-item:nth-child(4) { animation-delay: 0.20s; }
+article[data-page="resume"].active .timeline-item:nth-child(5) { animation-delay: 0.25s; }
+article[data-page="resume"].active .timeline-item:nth-child(6) { animation-delay: 0.30s; }
+article[data-page="resume"].active .timeline-item:nth-child(7) { animation-delay: 0.35s; }
+article[data-page="resume"].active .timeline-item:nth-child(8) { animation-delay: 0.40s; }
+article[data-page="resume"].active .timeline-item:nth-child(9) { animation-delay: 0.45s; }
+
+article[data-page="resume"].active .skills-item {
+  animation: fadeUp 0.35s ease both;
+}
+article[data-page="resume"].active .skills-item:nth-child(1) { animation-delay: 0.10s; }
+article[data-page="resume"].active .skills-item:nth-child(2) { animation-delay: 0.18s; }
+article[data-page="resume"].active .skills-item:nth-child(3) { animation-delay: 0.26s; }
+article[data-page="resume"].active .skills-item:nth-child(4) { animation-delay: 0.34s; }
+article[data-page="resume"].active .skills-item:nth-child(5) { animation-delay: 0.42s; }
+
+/* Re-scope skill bar animation so it fires when Resume tab is activated,
+   not on hidden page load. Higher specificity beats the global rule. */
+article[data-page="resume"].active .skill-progress-fill {
+  animation: skillFill 1.2s ease-in-out both;
+  animation-delay: 0.4s;
+}
+
+
+/**
+ * Portfolio tab — staggered entrance
+ */
+
+article[data-page="portfolio"].active .filter-item {
+  animation: popIn 0.25s ease both;
+}
+article[data-page="portfolio"].active .filter-item:nth-child(1) { animation-delay: 0.03s; }
+article[data-page="portfolio"].active .filter-item:nth-child(2) { animation-delay: 0.08s; }
+article[data-page="portfolio"].active .filter-item:nth-child(3) { animation-delay: 0.13s; }
+article[data-page="portfolio"].active .filter-item:nth-child(4) { animation-delay: 0.18s; }
+
+/* Extend project cards with staggered fadeUp.
+   MUST keep scaleUp to not break existing scale effect (animation not additive). */
+.project-item.active {
+  animation: scaleUp 0.25s ease both, fadeUp 0.3s ease both;
+}
+.project-item.active:nth-child(1)  { animation-delay: 0.00s; }
+.project-item.active:nth-child(2)  { animation-delay: 0.06s; }
+.project-item.active:nth-child(3)  { animation-delay: 0.12s; }
+.project-item.active:nth-child(4)  { animation-delay: 0.18s; }
+.project-item.active:nth-child(5)  { animation-delay: 0.24s; }
+.project-item.active:nth-child(6)  { animation-delay: 0.30s; }
+.project-item.active:nth-child(7)  { animation-delay: 0.36s; }
+.project-item.active:nth-child(8)  { animation-delay: 0.42s; }
+.project-item.active:nth-child(9)  { animation-delay: 0.48s; }
+
+
+/**
+ * Design tab — filter buttons
+ */
+
+article[data-page="design"].active .filter-item {
+  animation: popIn 0.25s ease both;
+}
+article[data-page="design"].active .filter-item:nth-child(1) { animation-delay: 0.03s; }
+article[data-page="design"].active .filter-item:nth-child(2) { animation-delay: 0.08s; }
+
+
+/**
+ * Blog tab — staggered entrance
+ */
+
+article[data-page="blog"].active .blog-post-item {
+  animation: fadeUp 0.4s ease both;
+}
+article[data-page="blog"].active .blog-post-item:nth-child(1) { animation-delay: 0.05s; }
+article[data-page="blog"].active .blog-post-item:nth-child(2) { animation-delay: 0.12s; }
+article[data-page="blog"].active .blog-post-item:nth-child(3) { animation-delay: 0.19s; }
+article[data-page="blog"].active .blog-post-item:nth-child(4) { animation-delay: 0.26s; }
+article[data-page="blog"].active .blog-post-item:nth-child(5) { animation-delay: 0.33s; }
+article[data-page="blog"].active .blog-post-item:nth-child(6) { animation-delay: 0.40s; }
+
+
+/**
+ * Contact tab — entrance
+ */
+
+article[data-page="contact"].active .mapbox {
+  animation: slideDown 0.5s ease both;
+  animation-delay: 0.05s;
+}
+
+article[data-page="contact"].active .contact-form {
+  animation: fadeUp 0.4s ease both;
+  animation-delay: 0.20s;
+}
+
+
+/**
+ * Accessibility — respect reduced motion preference
+ */
+
+@media (prefers-reduced-motion: reduce) {
+  .sidebar,
+  .avatar-box,
+  .info-content .name,
+  .info-content .title,
+  .info-content .title::after,
+  .contact-item,
+  .social-item,
+  .project-item.active,
+  article[data-page="about"].active .about-text p,
+  article[data-page="about"].active .service-item,
+  article[data-page="about"].active .clients-item,
+  article[data-page="resume"].active .timeline-item,
+  article[data-page="resume"].active .skills-item,
+  article[data-page="resume"].active .skill-progress-fill,
+  article[data-page="portfolio"].active .filter-item,
+  article[data-page="design"].active .filter-item,
+  article[data-page="blog"].active .blog-post-item,
+  article[data-page="contact"].active .mapbox,
+  article[data-page="contact"].active .contact-form {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+  }
 }

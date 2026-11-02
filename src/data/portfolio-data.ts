@@ -212,54 +212,33 @@ export const skills = [
   { name: "Cyber Security", value: 80 },
 ];
 
-export type ProjectItem = {
+export type DesignItem = {
   title: string;
-  category: string;
   image: string;
   url: string;
   prototypeUrl?: string;
 };
 
-export const portfolioCategories = ["All", "Web design", "Applications", "Web development", "IOT", "Python"];
-
-export const portfolioProjects: ProjectItem[] = [
-  { title: "Step Into Style", category: "web development", image: "/images/Project-01.png", url: "https://github.com/HimanshuHeda/step_into_style" },
-  { title: "Multi Step Form", category: "web development", image: "/images/Blog-02.png", url: "https://github.com/HimanshuHeda/Multi_Step_Form" },
-  { title: "TextUtil", category: "web design", image: "/images/Project-04.png", url: "https://github.com/HimanshuHeda/TextUtil_React" },
-  { title: "Bank Management System", category: "applications", image: "/images/Project-02.png", url: "https://github.com/HimanshuHeda/Bank_Management_System_Java" },
-  { title: "Zip Tales", category: "web design", image: "/images/project-5.png", url: "https://github.com/HimanshuHeda/Zip_Tales" },
-  { title: "Smart Meter", category: "iot", image: "/images/project-6.png", url: "https://github.com/HimanshuHeda/Smart_Energy_Meter" },
-  { title: "Car Sales Analysis", category: "python", image: "/images/project-7.png", url: "https://github.com/HimanshuHeda/Car_Sales_Analysis" },
-  { title: "Chatting Application", category: "applications", image: "/images/Project-03.png", url: "https://github.com/HimanshuHeda/Chatting_Application_Java" },
-  { title: "Myntra Clone", category: "web development", image: "/images/Blog-03.png", url: "https://github.com/HimanshuHeda/Myntra_Clone" },
-  { title: "Amazon Clone", category: "web development", image: "/images/Blog-01.png", url: "https://himanshuheda.github.io/Amazon_Clone/" },
-  { title: "Tic Tac Toe", category: "web development", image: "/images/blog-5.jpg", url: "https://tic-tac-toe-bice-six-89.vercel.app/" },
-];
-
-export const designProjects: ProjectItem[] = [
+export const designProjects: DesignItem[] = [
   {
-    title: "Christ",
-    category: "figma",
+    title: "Christ",
     image: "/images/Christ.png",
     url: "https://www.figma.com/design/RukbRCyfreN3hBKfXRQrE4/Christ?node-id=0-1&t=qSn7xMOzrWpyQSTg-1",
   },
   {
-    title: "International Bank",
-    category: "figma",
+    title: "International Bank",
     image: "/images/Bank.png",
     url: "https://www.figma.com/design/mjWjrfBlldX8C5m3klqLPf/International-Bank?node-id=0-1&t=kaB4F0J3f7gRWThW-1",
     prototypeUrl: "https://www.figma.com/proto/mjWjrfBlldX8C5m3klqLPf/International-Bank?node-id=2-2&p=f&t=VtzuHAE5wX9RUew1-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=2%3A2&show-proto-sidebar=1",
   },
   {
-    title: "Indian Manuscripts",
-    category: "figma",
+    title: "Indian Manuscripts",
     image: "/images/Manuscripts.png",
     url: "https://www.figma.com/design/Uy6Sc3AjfrXk1fgi84dVUG/Indian-Manuscripts?node-id=0-1&t=jCRlHefpmDfN48Rc-1",
     prototypeUrl: "https://www.figma.com/proto/Uy6Sc3AjfrXk1fgi84dVUG/Indian-Manuscripts?node-id=2-2&p=f&t=VtzuHAE5wX9RUew1-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=2%3A2&show-proto-sidebar=1",
   },
   {
-    title: "Furniture",
-    category: "figma",
+    title: "Furniture",
     image: "/images/Furniture.png",
     url: "https://www.figma.com/design/va4OHqFsbBmuNhVTjpaNvl/Furniture?node-id=0-1&t=SngNE4SN7uWUvycr-1",
     prototypeUrl: "https://www.figma.com/proto/va4OHqFsbBmuNhVTjpaNvl/Furniture?node-id=2-2&p=f&t=VtzuHAE5wX9RUew1-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=2%3A2&show-proto-sidebar=1",

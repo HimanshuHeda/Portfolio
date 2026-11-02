@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageSocial } from "@/lib/site";
 import Image from "next/image";
 import CaseStudyCard from "@/components/CaseStudyCard";
 import { caseStudies, earlierWork } from "@/data/case-studies";
@@ -9,6 +10,7 @@ export const metadata: Metadata = {
   description:
     "Case studies by Himanshu Heda: FabVision AI on Google Play, workflow automation that cut manual processing by 80%, a 60 min to under 5 sec pump selector, and more.",
   alternates: { canonical: "/work" },
+  ...pageSocial("Work", "Case studies by Himanshu Heda: FabVision AI on Google Play, workflow automation that cut manual processing by 80%, a 60 min to under 5 sec pump selector, and more.", "/work"),
 };
 
 export default function WorkPage() {

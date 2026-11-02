@@ -1,16 +1,20 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
-import Sidebar from "@/components/Sidebar";
-import Navbar from "@/components/Navbar";
+import { JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import { personalInfo } from "@/data/portfolio-data";
-import { publicFileExists } from "@/lib/assets";
 import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
-const poppins = Poppins({
-  variable: "--font-poppins-loaded",
+// Story fonts: display for headings, mono for labels and terminal text.
+const display = Space_Grotesk({
+  variable: "--font-display",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
+});
+
+const mono = JetBrains_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
+  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
@@ -89,7 +93,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={poppins.variable}>
+      <body className={`${display.variable} ${mono.variable}`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -99,15 +103,7 @@ export default function RootLayout({
         <a href="#content" className="skip-link">
           Skip to content
         </a>
-        <main>
-          <Sidebar resumeAvailable={publicFileExists(personalInfo.resumeUrl)} />
-          <div className="main-content">
-            <Navbar />
-            <div id="content" tabIndex={-1}>
-              {children}
-            </div>
-          </div>
-        </main>
+        {children}
       </body>
     </html>
   );

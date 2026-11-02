@@ -1,29 +1,20 @@
-"use client";
-
-import { useRef, useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import Link from "next/link";
 import {
   IoBookOutline,
   IoBriefcaseOutline,
   IoGitPullRequestOutline,
   IoDocumentTextOutline,
+  IoCodeSlashOutline,
+  IoRibbonOutline,
 } from "react-icons/io5";
 import {
+  achievements,
   education,
   experience,
   openSource,
   publication,
-  skills,
+  skillGroups,
 } from "@/data/portfolio-data";
-
-const slideInLeft = {
-  hidden: { opacity: 0, x: -25 },
-  visible: (i: number) => ({
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.35, delay: i * 0.05 },
-  }),
-};
 
 function SectionTitle({ icon, children }: { icon: React.ReactNode; children: React.ReactNode }) {
   return (
@@ -35,32 +26,6 @@ function SectionTitle({ icon, children }: { icon: React.ReactNode; children: Rea
 }
 
 export default function ResumeSection() {
-  const [counterDone, setCounterDone] = useState(false);
-  const countersRef = useRef<HTMLUListElement>(null);
-
-  // animate skill counters on mount
-  useEffect(() => {
-    if (counterDone) return;
-    setCounterDone(true);
-    const timer = setTimeout(() => {
-      if (!countersRef.current) return;
-      countersRef.current
-        .querySelectorAll<HTMLElement>(".skill-counter")
-        .forEach((el) => {
-          const target = parseInt(el.dataset.value || "0", 10);
-          if (isNaN(target)) return;
-          let current = 0;
-          const increment = Math.max(1, Math.ceil(target / 40));
-          const id = setInterval(() => {
-            current = Math.min(current + increment, target);
-            el.textContent = `${current}%`;
-            if (current >= target) clearInterval(id);
-          }, 22);
-        });
-    }, 450);
-    return () => clearTimeout(timer);
-  }, [counterDone]);
-
   return (
     <article className="resume">
       <header>
@@ -72,15 +37,8 @@ export default function ResumeSection() {
         <SectionTitle icon={<IoBriefcaseOutline />}>Experience</SectionTitle>
 
         <ol className="timeline-list">
-          {experience.map((item, i) => (
-            <motion.li
-              key={`${item.role}-${item.period}`}
-              className="timeline-item"
-              custom={i}
-              initial="hidden"
-              animate="visible"
-              variants={slideInLeft}
-            >
+          {experience.map((item) => (
+            <li key={`${item.role}-${item.period}`} className="timeline-item">
               <h3 className="h4 timeline-item-title">
                 {item.role}, {item.org}
                 {item.place ? `, ${item.place}` : ""}
@@ -90,8 +48,26 @@ export default function ResumeSection() {
                 {item.points.map((p) => (
                   <li key={p} className="timeline-text">{p}</li>
                 ))}
+                {item.projects?.map((p) => (
+                  <li key={p.name} className="timeline-text">
+                    {p.href ? (
+                      <Link href={p.href} className="inline-link">{p.name}</Link>
+                    ) : (
+                      <strong>{p.name}</strong>
+                    )}
+                    {p.inProgress && <span className="status-pill">In progress</span>}
+                    {": "}
+                    {p.text}
+                  </li>
+                ))}
+                {item.additional && (
+                  <li className="timeline-text">
+                    <strong className="additional-label">Additional contributions:</strong>{" "}
+                    {item.additional}
+                  </li>
+                )}
               </ul>
-            </motion.li>
+            </li>
           ))}
         </ol>
       </section>
@@ -112,25 +88,36 @@ export default function ResumeSection() {
         </div>
       </section>
 
+      {/* Skills: grouped tags, no percentages */}
+      <section className="timeline">
+        <SectionTitle icon={<IoCodeSlashOutline />}>Skills</SectionTitle>
+        <dl className="skill-groups">
+          {skillGroups.map((g) => (
+            <div key={g.name} className="skill-group">
+              <dt className="skill-group-name">{g.name}</dt>
+              <dd>
+                <ul className="tag-list">
+                  {g.items.map((s) => (
+                    <li key={s} className="tag">{s}</li>
+                  ))}
+                </ul>
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
       {/* Education */}
       <section className="timeline">
         <SectionTitle icon={<IoBookOutline />}>Education</SectionTitle>
-
         <ol className="timeline-list">
-          {education.map((item, i) => (
-            <motion.li
-              key={item.title}
-              className="timeline-item"
-              custom={i}
-              initial="hidden"
-              animate="visible"
-              variants={slideInLeft}
-            >
+          {education.map((item) => (
+            <li key={item.title} className="timeline-item">
               <h3 className="h4 timeline-item-title">
                 {item.title}, {item.place}
               </h3>
               <span>{item.period}</span>
-            </motion.li>
+            </li>
           ))}
         </ol>
       </section>
@@ -141,51 +128,43 @@ export default function ResumeSection() {
         <ol className="timeline-list">
           <li className="timeline-item">
             <h3 className="h4 timeline-item-title publication-title">
-              {publication.url ? (
-                <a href={publication.url} target="_blank" rel="noopener noreferrer">
-                  {publication.title}
-                </a>
-              ) : (
-                publication.title
-              )}
+              <a href={publication.links[0].href} target="_blank" rel="noopener noreferrer">
+                {publication.title}
+              </a>
             </h3>
             <span>
               {publication.venue}, {publication.year}
             </span>
-            <p className="timeline-text">With {publication.coAuthors}.</p>
+            <p className="timeline-text">
+              {publication.result}. With {publication.coAuthors}.
+            </p>
+            <p className="timeline-text publication-links">
+              {publication.links.map((l) => (
+                <a key={l.href} href={l.href} target="_blank" rel="noopener noreferrer" className="inline-link">
+                  {l.label}
+                </a>
+              ))}
+            </p>
           </li>
         </ol>
       </section>
 
-      {/* Skills */}
-      <section className="skill">
-        <h2 className="h3 skills-title">My skills</h2>
-
-        <ul className="skills-list content-card" ref={countersRef}>
-          {skills.map((skill, i) => (
-            <motion.li
-              key={skill.name}
-              className="skills-item"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, delay: i * 0.08 }}
-            >
-              <div className="title-wrapper">
-                <h3 className="h5">{skill.name}</h3>
-                <span
-                  className="skill-counter"
-                  data-value={skill.value}
-                >
-                  0%
-                </span>
-              </div>
-              <div className="skill-progress-bg">
-                <div
-                  className="skill-progress-fill"
-                  style={{ width: `${skill.value}%` }}
-                />
-              </div>
-            </motion.li>
+      {/* Achievements & certifications: link only where a verification URL exists */}
+      <section className="timeline">
+        <SectionTitle icon={<IoRibbonOutline />}>Achievements &amp; certifications</SectionTitle>
+        <ul className="achievement-list">
+          {achievements.map((a) => (
+            <li key={a.title} className="timeline-text">
+              {a.href ? (
+                <a href={a.href} target="_blank" rel="noopener noreferrer" className="inline-link">
+                  {a.title}
+                </a>
+              ) : (
+                <span className="achievement-title">{a.title}</span>
+              )}
+              {a.issuer && <>, {a.issuer}</>}
+              {a.date && <> ({a.date})</>}
+            </li>
           ))}
         </ul>
       </section>

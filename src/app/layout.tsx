@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import Sidebar from "@/components/Sidebar";
 import Navbar from "@/components/Navbar";
-import Providers from "@/components/Providers";
 import { personalInfo } from "@/data/portfolio-data";
 import { publicFileExists } from "@/lib/assets";
 import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "@/lib/site";
@@ -97,15 +96,18 @@ export default function RootLayout({
             __html: JSON.stringify(personJsonLd).replace(/</g, "\\u003c"),
           }}
         />
-        <Providers>
-          <main>
-            <Sidebar resumeAvailable={publicFileExists(personalInfo.resumeUrl)} />
-            <div className="main-content">
-              <Navbar />
+        <a href="#content" className="skip-link">
+          Skip to content
+        </a>
+        <main>
+          <Sidebar resumeAvailable={publicFileExists(personalInfo.resumeUrl)} />
+          <div className="main-content">
+            <Navbar />
+            <div id="content" tabIndex={-1}>
               {children}
             </div>
-          </main>
-        </Providers>
+          </div>
+        </main>
       </body>
     </html>
   );

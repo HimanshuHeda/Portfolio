@@ -1,6 +1,9 @@
 // ── Centralized portfolio data ──
 // Edit this file to update your portfolio content.
 
+// Public name of the manufacturing-client pump project. Rename here only.
+export const CES_PUMP_SELECTOR = "CES Pump Selector";
+
 export const personalInfo = {
   name: "Himanshu Heda",
   title: "Full-Stack Developer | AI Integration Engineer",
@@ -132,7 +135,7 @@ export const experience: TimelineEntry[] = [
         href: "/work/workorder-lifecycle",
       },
       {
-        name: "CES Pump Selector",
+        name: CES_PUMP_SELECTOR,
         text: "pump selection for a manufacturing client from 60 minutes to under 5 seconds, 100% accurate against manufacturer datasheets.",
         href: "/work/ces-pump-selector",
       },

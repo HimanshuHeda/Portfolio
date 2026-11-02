@@ -1,4 +1,6 @@
 // ── Case studies (/work and /work/[slug]) ──
+import { CES_PUMP_SELECTOR } from "./portfolio-data";
+
 // Facts only. No client names, client data, internal URLs or screenshots of
 // client systems. Items without a public screenshot get an architecture diagram.
 
@@ -80,7 +82,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "ces-pump-selector",
-    title: "CES Pump Selector",
+    title: CES_PUMP_SELECTOR,
     summary: "Pump selection for a manufacturing client, from 60 minutes to under 5 seconds.",
     status: "Live",
     context: "Manufacturing client",

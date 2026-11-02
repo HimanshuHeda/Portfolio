@@ -27,6 +27,16 @@ export default function ContactSection() {
     e.preventDefault();
     if (!formEndpoint) return;
     const form = e.currentTarget;
+
+    // Honeypot: real users never see or fill "_gotcha". Bots that do get a
+    // fake success and nothing is sent. Formspree also drops these server-side.
+    if ((form.elements.namedItem("_gotcha") as HTMLInputElement | null)?.value) {
+      form.reset();
+      setFormValid(false);
+      setStatus({ message: "Message sent successfully! I will get back to you soon.", type: "success" });
+      return;
+    }
+
     setSending(true);
     setStatus(null);
 
@@ -78,12 +88,21 @@ export default function ContactSection() {
         </p>
       </section>
 
+      {/* The mailto above is the fallback: it is always shown, and the form
+          below only renders when NEXT_PUBLIC_FORMSPREE_FORM_ID is set. */}
+
       {formEndpoint && (
         <section className="contact-form">
           <h2 className="h3 form-title">Contact Form</h2>
 
           <form className="form" onInput={handleInput} onSubmit={handleSubmit}>
             <input type="hidden" name="_subject" value="New message from Portfolio" />
+
+            {/* Spam honeypot: hidden from people and screen readers. */}
+            <div className="honeypot" aria-hidden="true">
+              <label htmlFor="contact-gotcha">Leave this field empty</label>
+              <input id="contact-gotcha" type="text" name="_gotcha" tabIndex={-1} autoComplete="off" />
+            </div>
 
             <div className="input-wrapper">
               <label className="sr-only" htmlFor="contact-name">Full name</label>

@@ -1503,3 +1503,12 @@ textarea.form-input::-webkit-resizer { display: none; }
 @media (min-width: 580px) {
   .skill-groups { margin-left: 65px; }
 }
+
+/* Contact form spam honeypot: off-screen, not display:none (some bots skip hidden fields) */
+.honeypot {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}

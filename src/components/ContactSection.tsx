@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, FormEvent } from "react";
-import { motion } from "framer-motion";
 import { IoPaperPlane } from "react-icons/io5";
 import { personalInfo } from "@/data/portfolio-data";
 
@@ -80,12 +79,7 @@ export default function ContactSection() {
       </section>
 
       {formEndpoint && (
-        <motion.section
-          className="contact-form"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.1 }}
-        >
+        <section className="contact-form">
           <h2 className="h3 form-title">Contact Form</h2>
 
           <form className="form" onInput={handleInput} onSubmit={handleSubmit}>
@@ -146,7 +140,7 @@ export default function ContactSection() {
               {status.message}
             </p>
           )}
-        </motion.section>
+        </section>
       )}
     </article>
   );

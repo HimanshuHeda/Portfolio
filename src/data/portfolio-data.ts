@@ -4,7 +4,7 @@
 export const personalInfo = {
   name: "Himanshu Heda",
   title: "Full-Stack Developer | AI Integration Engineer",
-  avatar: "/images/my-avatar.png",
+  avatar: "/images/my-avatar.webp",
   email: "himanshuheda123@gmail.com",
   // City only. Phone and full address stay on the resume PDF, not in page HTML.
   location: "Noida, India",
@@ -250,25 +250,25 @@ export type DesignItem = {
 
 export const designProjects: DesignItem[] = [
   {
-    title: "Christ",
-    image: "/images/Christ.png",
+    title: "Christ",
+    image: "/images/design/christ.webp",
     url: "https://www.figma.com/design/RukbRCyfreN3hBKfXRQrE4/Christ?node-id=0-1&t=qSn7xMOzrWpyQSTg-1",
   },
   {
-    title: "International Bank",
-    image: "/images/Bank.png",
+    title: "International Bank",
+    image: "/images/design/international-bank.webp",
     url: "https://www.figma.com/design/mjWjrfBlldX8C5m3klqLPf/International-Bank?node-id=0-1&t=kaB4F0J3f7gRWThW-1",
     prototypeUrl: "https://www.figma.com/proto/mjWjrfBlldX8C5m3klqLPf/International-Bank?node-id=2-2&p=f&t=VtzuHAE5wX9RUew1-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=2%3A2&show-proto-sidebar=1",
   },
   {
-    title: "Indian Manuscripts",
-    image: "/images/Manuscripts.png",
+    title: "Indian Manuscripts",
+    image: "/images/design/indian-manuscripts.webp",
     url: "https://www.figma.com/design/Uy6Sc3AjfrXk1fgi84dVUG/Indian-Manuscripts?node-id=0-1&t=jCRlHefpmDfN48Rc-1",
     prototypeUrl: "https://www.figma.com/proto/Uy6Sc3AjfrXk1fgi84dVUG/Indian-Manuscripts?node-id=2-2&p=f&t=VtzuHAE5wX9RUew1-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=2%3A2&show-proto-sidebar=1",
   },
   {
-    title: "Furniture",
-    image: "/images/Furniture.png",
+    title: "Furniture",
+    image: "/images/design/furniture.webp",
     url: "https://www.figma.com/design/va4OHqFsbBmuNhVTjpaNvl/Furniture?node-id=0-1&t=SngNE4SN7uWUvycr-1",
     prototypeUrl: "https://www.figma.com/proto/va4OHqFsbBmuNhVTjpaNvl/Furniture?node-id=2-2&p=f&t=VtzuHAE5wX9RUew1-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=2%3A2&show-proto-sidebar=1",
   },

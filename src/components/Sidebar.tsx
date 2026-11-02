@@ -1,8 +1,7 @@
 "use client";
 
-import { useState, useSyncExternalStore } from "react";
+import { useState } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
 import {
   IoMailOutline,
   IoLocationOutline,
@@ -18,26 +17,14 @@ const socialIconMap: Record<string, React.ReactNode> = {
   linkedin: <IoLogoLinkedin />,
 };
 
-const DESKTOP_QUERY = "(min-width: 1250px)";
-
-function subscribeDesktop(onChange: () => void) {
-  const mq = window.matchMedia(DESKTOP_QUERY);
-  mq.addEventListener("change", onChange);
-  return () => mq.removeEventListener("change", onChange);
-}
-
 export default function Sidebar({ resumeAvailable }: { resumeAvailable: boolean }) {
-  // Contacts are always open on wide screens; elsewhere the user toggles them.
-  const isDesktop = useSyncExternalStore(
-    subscribeDesktop,
-    () => window.matchMedia(DESKTOP_QUERY).matches,
-    () => false
-  );
-  const [toggled, setToggled] = useState<boolean | null>(null);
-  const expanded = toggled ?? isDesktop;
+  // On wide screens (>= 1250px) CSS always shows the contacts and hides the
+  // toggle. Below that, the toggle opens them. Contacts are always in the
+  // server-rendered HTML, so nothing shifts after hydration.
+  const [open, setOpen] = useState(false);
 
   return (
-    <aside className="sidebar">
+    <aside className="sidebar" data-open={open}>
       <div className="sidebar-info">
         <figure className="avatar-box">
           <Image
@@ -55,76 +42,58 @@ export default function Sidebar({ resumeAvailable }: { resumeAvailable: boolean 
 
         <button
           className="info_more-btn"
-          onClick={() => setToggled(!expanded)}
-          aria-expanded={expanded}
+          onClick={() => setOpen(!open)}
+          aria-expanded={open}
           aria-controls="sidebar-contacts"
-          aria-label={expanded ? "Hide contacts" : "Show contacts"}
+          aria-label={open ? "Hide contacts" : "Show contacts"}
         >
-          <span>{expanded ? "Hide Contacts" : "Show Contacts"}</span>
-          <IoChevronDown
-            aria-hidden="true"
-            style={{
-              transform: expanded ? "rotate(180deg)" : "rotate(0deg)",
-              transition: "transform 0.3s ease",
-            }}
-          />
+          <span>{open ? "Hide Contacts" : "Show Contacts"}</span>
+          <IoChevronDown aria-hidden="true" className="info_more-icon" />
         </button>
       </div>
 
-      <AnimatePresence initial={false}>
-        {expanded && (
-          <motion.div
-            id="sidebar-contacts"
-            className="sidebar-info_more"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.35, ease: "easeInOut" }}
-            style={{ overflow: "hidden" }}
-          >
-            <div className="separator" />
+      <div id="sidebar-contacts" className="sidebar-info_more">
+        <div className="separator" />
 
-            <ul className="contacts-list">
-              <ContactItem icon={<IoMailOutline />} title="Email">
-                <a href={`mailto:${personalInfo.email}`} className="contact-link">
-                  {personalInfo.email}
-                </a>
-              </ContactItem>
+        <ul className="contacts-list">
+          <ContactItem icon={<IoMailOutline />} title="Email">
+            <a href={`mailto:${personalInfo.email}`} className="contact-link">
+              {personalInfo.email}
+            </a>
+          </ContactItem>
 
-              <ContactItem icon={<IoLocationOutline />} title="Location">
-                <address>{personalInfo.location}</address>
-              </ContactItem>
+          <ContactItem icon={<IoLocationOutline />} title="Location">
+            <address>{personalInfo.location}</address>
+          </ContactItem>
 
-              {/* TODO(me): add public/assets/Resume/Himanshu_Heda_Resume.pdf; this item stays hidden until it exists. */}
-              {resumeAvailable && (
-                <ContactItem icon={<IoCloudDownloadOutline />} title="Resume">
-                  <a href={personalInfo.resumeUrl} download className="contact-link">
-                    Download PDF
-                  </a>
-                </ContactItem>
-              )}
-            </ul>
+          {/* TODO(me): add public/assets/Resume/Himanshu_Heda_Resume.pdf (without the client name); this item stays hidden until it exists. */}
+          {resumeAvailable && (
+            <ContactItem icon={<IoCloudDownloadOutline />} title="Resume">
+              <a href={personalInfo.resumeUrl} download className="contact-link">
+                Download PDF
+              </a>
+            </ContactItem>
+          )}
+        </ul>
 
-            <div className="separator" />
+        <div className="separator" />
 
-            <ul className="social-list">
-              {personalInfo.socials.map((s) => (
-                <li key={s.name} className="social-item">
-                  <a
-                    href={s.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="social-link"
-                    aria-label={s.name}
-                  >
-                    {socialIconMap[s.icon]}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-        )}
-      </AnimatePresence>
+        <ul className="social-list">
+          {personalInfo.socials.map((s) => (
+            <li key={s.name} className="social-item">
+              <a
+                href={s.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-link"
+                aria-label={s.name}
+              >
+                {socialIconMap[s.icon]}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
     </aside>
   );
 }

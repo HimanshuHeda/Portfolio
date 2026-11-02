@@ -60,14 +60,14 @@ export default function Sidebar() {
         </motion.figure>
 
         <div className="info-content">
-          <motion.h1
+          <motion.p
             className="name"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.3 }}
           >
             {personalInfo.name}
-          </motion.h1>
+          </motion.p>
           <p className="title">{personalInfo.title}</p>
         </div>
 

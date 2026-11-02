@@ -2,8 +2,19 @@
 
 import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { IoBookOutline } from "react-icons/io5";
-import { education, experience, skills } from "@/data/portfolio-data";
+import {
+  IoBookOutline,
+  IoBriefcaseOutline,
+  IoGitPullRequestOutline,
+  IoDocumentTextOutline,
+} from "react-icons/io5";
+import {
+  education,
+  experience,
+  openSource,
+  publication,
+  skills,
+} from "@/data/portfolio-data";
 
 const slideInLeft = {
   hidden: { opacity: 0, x: -25 },
@@ -13,6 +24,15 @@ const slideInLeft = {
     transition: { duration: 0.35, delay: i * 0.05 },
   }),
 };
+
+function SectionTitle({ icon, children }: { icon: React.ReactNode; children: React.ReactNode }) {
+  return (
+    <div className="title-wrapper">
+      <div className="icon-box" aria-hidden="true">{icon}</div>
+      <h2 className="h3">{children}</h2>
+    </div>
+  );
+}
 
 export default function ResumeSection() {
   const [counterDone, setCounterDone] = useState(false);
@@ -42,68 +62,104 @@ export default function ResumeSection() {
   }, [counterDone]);
 
   return (
-    <article className="resume" data-page="resume">
+    <article className="resume">
       <header>
-        <h2 className="h2 article-title">Resume</h2>
+        <h1 className="h2 article-title">Resume</h1>
       </header>
 
-      {/* Education */}
+      {/* Experience */}
       <section className="timeline">
-        <div className="title-wrapper">
-          <div className="icon-box">
-            <IoBookOutline />
-          </div>
-          <h3 className="h3">Education</h3>
-        </div>
+        <SectionTitle icon={<IoBriefcaseOutline />}>Experience</SectionTitle>
 
         <ol className="timeline-list">
-          {education.map((item, i) => (
+          {experience.map((item, i) => (
             <motion.li
-              key={i}
+              key={`${item.role}-${item.period}`}
               className="timeline-item"
               custom={i}
               initial="hidden"
               animate="visible"
               variants={slideInLeft}
             >
-              <h4 className="h4 timeline-item-title">{item.title}</h4>
+              <h3 className="h4 timeline-item-title">
+                {item.role}, {item.org}
+                {item.place ? `, ${item.place}` : ""}
+              </h3>
               <span>{item.period}</span>
-              <p className="timeline-text">{item.text}</p>
+              <ul className="timeline-points">
+                {item.points.map((p) => (
+                  <li key={p} className="timeline-text">{p}</li>
+                ))}
+              </ul>
             </motion.li>
           ))}
         </ol>
       </section>
 
-      {/* Experience */}
+      {/* Open source: one compact block instead of separate timeline entries */}
       <section className="timeline">
-        <div className="title-wrapper">
-          <div className="icon-box">
-            <IoBookOutline />
-          </div>
-          <h3 className="h3">Experience</h3>
+        <SectionTitle icon={<IoGitPullRequestOutline />}>{openSource.title}</SectionTitle>
+        <div className="open-source-card">
+          <p className="timeline-text">{openSource.roles}</p>
+          <ul className="open-source-stats">
+            {openSource.stats.map((s) => (
+              <li key={s.label}>
+                <span className="metric-value">{s.value}</span>
+                <span className="metric-label">{s.label}</span>
+              </li>
+            ))}
+          </ul>
         </div>
+      </section>
+
+      {/* Education */}
+      <section className="timeline">
+        <SectionTitle icon={<IoBookOutline />}>Education</SectionTitle>
 
         <ol className="timeline-list">
-          {experience.map((item, i) => (
+          {education.map((item, i) => (
             <motion.li
-              key={i}
+              key={item.title}
               className="timeline-item"
               custom={i}
               initial="hidden"
               animate="visible"
               variants={slideInLeft}
             >
-              <h4 className="h4 timeline-item-title">{item.title}</h4>
+              <h3 className="h4 timeline-item-title">
+                {item.title}, {item.place}
+              </h3>
               <span>{item.period}</span>
-              <p className="timeline-text">{item.text}</p>
             </motion.li>
           ))}
+        </ol>
+      </section>
+
+      {/* Publication */}
+      <section className="timeline">
+        <SectionTitle icon={<IoDocumentTextOutline />}>Publication</SectionTitle>
+        <ol className="timeline-list">
+          <li className="timeline-item">
+            <h3 className="h4 timeline-item-title publication-title">
+              {publication.url ? (
+                <a href={publication.url} target="_blank" rel="noopener noreferrer">
+                  {publication.title}
+                </a>
+              ) : (
+                publication.title
+              )}
+            </h3>
+            <span>
+              {publication.venue}, {publication.year}
+            </span>
+            <p className="timeline-text">With {publication.coAuthors}.</p>
+          </li>
         </ol>
       </section>
 
       {/* Skills */}
       <section className="skill">
-        <h3 className="h3 skills-title">My skills</h3>
+        <h2 className="h3 skills-title">My skills</h2>
 
         <ul className="skills-list content-card" ref={countersRef}>
           {skills.map((skill, i) => (
@@ -115,7 +171,7 @@ export default function ResumeSection() {
               transition={{ duration: 0.35, delay: i * 0.08 }}
             >
               <div className="title-wrapper">
-                <h5 className="h5">{skill.name}</h5>
+                <h3 className="h5">{skill.name}</h3>
                 <span
                   className="skill-counter"
                   data-value={skill.value}

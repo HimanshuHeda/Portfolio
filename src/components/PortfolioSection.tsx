@@ -7,7 +7,7 @@ export default function PortfolioSection() {
   return (
     <article className="portfolio" data-page="portfolio">
       <header>
-        <h2 className="h2 article-title">Portfolio</h2>
+        <h1 className="h2 article-title">Work</h1>
       </header>
       <FilterableProjects
         projects={portfolioProjects}

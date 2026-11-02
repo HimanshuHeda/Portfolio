@@ -5,6 +5,7 @@ import {
   services,
   certifications,
   badges,
+  type ProofImage,
 } from "@/data/portfolio-data";
 
 export default function AboutSection() {
@@ -37,27 +38,36 @@ export default function AboutSection() {
         </ul>
       </section>
 
-      <section className="clients">
-        <h2 className="h3 clients-title">Certifications</h2>
-        <ul className="clients-list has-scrollbar">
-          {certifications.map((c) => (
-            <li key={c.alt} className="clients-item">
-              <Image src={c.src} alt={c.alt} width={150} height={80} />
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="clients">
-        <h2 className="h3 clients-title">Badges</h2>
-        <ul className="clients-list has-scrollbar">
-          {badges.map((b) => (
-            <li key={b.alt} className="clients-item">
-              <Image src={b.src} alt={b.alt} width={150} height={80} />
-            </li>
-          ))}
-        </ul>
-      </section>
+      <ProofStrip title="Certifications" items={certifications} />
+      <ProofStrip title="Badges" items={badges} />
     </article>
+  );
+}
+
+// Horizontal strip of certificate/badge images. An item links only when it
+// has a verification URL; otherwise it is a plain image (never href="#").
+function ProofStrip({ title, items }: { title: string; items: ProofImage[] }) {
+  return (
+    <section className="clients">
+      <h2 className="h3 clients-title">{title}</h2>
+      <ul className="clients-list has-scrollbar" tabIndex={0} aria-label={`${title} (scrolls sideways)`}>
+        {items.map((c) => {
+          const img = (
+            <Image src={c.src} alt={c.alt} width={c.width} height={c.height} sizes="160px" />
+          );
+          return (
+            <li key={c.src} className="clients-item">
+              {c.href ? (
+                <a href={c.href} target="_blank" rel="noopener noreferrer" title={`Verify: ${c.alt}`}>
+                  {img}
+                </a>
+              ) : (
+                img
+              )}
+            </li>
+          );
+        })}
+      </ul>
+    </section>
   );
 }

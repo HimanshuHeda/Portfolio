@@ -61,22 +61,38 @@ export const services = [
   },
 ];
 
-export const certifications = [
-  { src: "/certifications/ACWOC.png", alt: "AcWoC Certificate" },
-  { src: "/certifications/infosys_java.png", alt: "Infosys Java Certificate" },
-  { src: "/certifications/ReactJS.png", alt: "ReactJS Certificate" },
-  { src: "/certifications/International Conference ICIEGL.jpg", alt: "International Conference ICIEGL Certificate" },
-  { src: "/certifications/POWER BI.jpg", alt: "Power BI Certificate" },
-  { src: "/certifications/TABLEAU.jpg", alt: "Tableau Certificate" },
-  { src: "/certifications/Python_HackerRank.png", alt: "Python HackerRank Certificate" },
+export type ProofImage = {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  /** Verification URL. Leave unset rather than linking to "#". */
+  href?: string;
+};
+
+// TODO(me): add verification links (Credly / issuer pages) where they exist.
+export const certifications: ProofImage[] = [
+  { src: "/certifications/acwoc.webp", alt: "AcWoC certificate", width: 480, height: 339 },
+  { src: "/certifications/infosys-java.webp", alt: "Infosys Springboard Java certificate", width: 480, height: 338 },
+  { src: "/certifications/infosys-reactjs.webp", alt: "Infosys Springboard ReactJS certificate", width: 480, height: 339 },
+  { src: "/certifications/iciegl-conference.webp", alt: "International Conference ICIEGL certificate", width: 480, height: 349 },
+  { src: "/certifications/power-bi.webp", alt: "Power BI certificate (RCPL)", width: 480, height: 335 },
+  { src: "/certifications/tableau.webp", alt: "Tableau certificate (RCPL)", width: 480, height: 336 },
+  { src: "/certifications/python-hackerrank.webp", alt: "Python certificate, HackerRank", width: 480, height: 360 },
 ];
 
-export const badges = [
-  { src: "/badges/AcWoC Badge.png", alt: "AcWoC Badge" },
-  { src: "/badges/networking-basics.png", alt: "Cisco Networking Basics Badge" },
-  { src: "/badges/AI_IBM.jpg", alt: "IBM AI Badge" },
-  { src: "/badges/Microsoft 365 Copilot.png", alt: "Microsoft 365 Copilot Badge" },
-  { src: "/badges/GitHub Practices Microsoft.png", alt: "GitHub Practices Microsoft Badge" },
+export const badges: ProofImage[] = [
+  {
+    src: "/badges/ibm-ai-fundamentals.webp",
+    alt: "IBM SkillsBuild AI Fundamentals badge",
+    width: 480,
+    height: 480,
+    href: "https://www.credly.com/go/l4rZkEc8LrrX3I6dyYnCXA",
+  },
+  { src: "/badges/acwoc.webp", alt: "AcWoC badge", width: 480, height: 480 },
+  { src: "/badges/cisco-networking-basics.webp", alt: "Cisco Networking Basics badge", width: 480, height: 480 },
+  { src: "/badges/microsoft-365-copilot.webp", alt: "Microsoft 365 Copilot badge", width: 480, height: 372 },
+  { src: "/badges/github-practices-microsoft.webp", alt: "Microsoft GitHub practices badge", width: 480, height: 371 },
 ];
 
 export type RoleProject = {
@@ -204,12 +220,25 @@ export const publication = {
   ],
 };
 
-export const skills = [
-  { name: "Web Developer", value: 90 },
-  { name: "Java Developer", value: 80 },
-  { name: "Python", value: 70 },
-  { name: "Cloud Computing", value: 80 },
-  { name: "Cyber Security", value: 80 },
+// Grouped tags, no percentages. Ordered by what I use daily.
+export const skillGroups = [
+  { name: "Frontend & Mobile", items: ["Flutter", "React", "Next.js", "TypeScript", "Tailwind CSS"] },
+  { name: "Backend", items: ["FastAPI", "Node.js", "Python", "REST APIs", "Celery", "Redis"] },
+  { name: "AI & Automation", items: ["Gemini", "Claude API", "LangChain", "PyTorch", "n8n"] },
+  { name: "Cloud & DevOps", items: ["AWS (S3, EC2)", "GCP", "Firebase", "Docker", "GitHub Actions"] },
+  { name: "Data", items: ["PostgreSQL", "MSSQL", "MySQL", "pgvector"] },
+];
+
+// TODO(me): add verification links for the items that have one; items without a link show as plain text.
+export const achievements: { title: string; issuer?: string; date?: string; href?: string }[] = [
+  { title: "Finalist, hackathon", issuer: "ABV-IIITM Gwalior", date: "Jun 2025" },
+  { title: "AWS Academy Cloud Foundations", issuer: "AWS Academy" },
+  { title: "Google Cloud Arcade Facilitator", issuer: "Google Cloud" },
+  { title: "Gen AI Academy", issuer: "Google Cloud" },
+  { title: "AI Fundamentals", issuer: "IBM SkillsBuild", href: "https://www.credly.com/go/l4rZkEc8LrrX3I6dyYnCXA" },
+  { title: "Artificial Intelligence (VIUP111)", issuer: "Intel" },
+  { title: "Python, Java and ReactJS", issuer: "Infosys Springboard" },
+  { title: "Power BI and Tableau", issuer: "RCPL" },
 ];
 
 export type DesignItem = {

@@ -1288,7 +1288,14 @@ textarea.form-input::-webkit-resizer { display: none; }
   margin-bottom: 6px;
 }
 
-.design-proto { font-size: var(--fs-8); }
+/* Prototype link sits under the thumbnail link: give it a 24px+ tap target with spacing */
+.design-proto {
+  display: inline-block;
+  font-size: var(--fs-7);
+  margin-top: 6px;
+  padding: 4px 0;
+  min-height: 24px;
+}
 
 /* ══════════════════════════════════════
    CASE STUDY page

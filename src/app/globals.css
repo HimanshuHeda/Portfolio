@@ -230,7 +230,7 @@ article + article { margin-top: 30px; }
    MAIN LAYOUT
    ══════════════════════════════════════ */
 
-main.pages-shell {
+main {
   margin: 15px 12px;
   margin-bottom: 75px;
   min-width: 259px;
@@ -695,7 +695,7 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   .icon-box { width: 48px; height: 48px; border-radius: 12px; font-size: 18px; }
 
-  main.pages-shell { margin-top: 60px; margin-bottom: 100px; }
+  main { margin-top: 60px; margin-bottom: 100px; }
 
   .sidebar { margin-bottom: 30px; }
   .sidebar-info { gap: 25px; }
@@ -775,7 +775,7 @@ textarea.form-input::-webkit-resizer { display: none; }
   .sidebar,
   article { width: 950px; box-shadow: var(--shadow-5); }
 
-  main.pages-shell { margin-bottom: 60px; }
+  main { margin-bottom: 60px; }
 
   .main-content {
     position: relative;
@@ -824,7 +824,7 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   article { min-height: 100%; }
 
-  main.pages-shell {
+  main {
     max-width: 1200px;
     margin-inline: auto;
     display: flex;
@@ -1519,6 +1519,3 @@ textarea.form-input::-webkit-resizer { display: none; }
   height: 1px;
   overflow: hidden;
 }
-
-/* Card pages (/resume, /work, /contact) use Poppins from the (pages) layout. */
-.pages-shell { font-family: var(--font-poppins-loaded), "Poppins", sans-serif; }

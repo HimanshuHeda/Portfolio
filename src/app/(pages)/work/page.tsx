@@ -29,7 +29,7 @@ export default function WorkPage() {
         ))}
       </ul>
 
-      <section id="earlier-work" className="earlier-work" aria-labelledby="earlier-title">
+      <section className="earlier-work" aria-labelledby="earlier-title">
         <h2 id="earlier-title" className="h3 section-title">Earlier work</h2>
         <ul className="earlier-list">
           {earlierWork.map((p) => (

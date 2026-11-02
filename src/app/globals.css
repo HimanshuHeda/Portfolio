@@ -1405,3 +1405,10 @@ textarea.form-input::-webkit-resizer { display: none; }
   white-space: nowrap;
   border: 0;
 }
+
+/* Long sidebar title must be able to shrink and wrap on small screens */
+.info-content { min-width: 0; }
+
+/* Proper nouns and paper titles: keep the source casing */
+.timeline-item-title,
+.service-item-title { text-transform: none; }

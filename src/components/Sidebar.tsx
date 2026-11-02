@@ -37,26 +37,16 @@ export default function Sidebar({ resumeAvailable }: { resumeAvailable: boolean 
   const expanded = toggled ?? isDesktop;
 
   return (
-    <motion.aside
-      className="sidebar"
-      initial={{ opacity: 0, y: -30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-    >
+    <aside className="sidebar">
       <div className="sidebar-info">
-        <motion.figure
-          className="avatar-box"
-          initial={{ opacity: 0, scale: 0.6 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
+        <figure className="avatar-box">
           <Image
             src={personalInfo.avatar}
             alt={personalInfo.name}
             width={80}
             height={80}
           />
-        </motion.figure>
+        </figure>
 
         <div className="info-content">
           <p className="name">{personalInfo.name}</p>
@@ -135,7 +125,7 @@ export default function Sidebar({ resumeAvailable }: { resumeAvailable: boolean 
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.aside>
+    </aside>
   );
 }
 

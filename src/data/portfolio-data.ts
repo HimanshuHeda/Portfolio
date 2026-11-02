@@ -3,7 +3,7 @@
 
 export const personalInfo = {
   name: "Himanshu Heda",
-  title: "Full Stack Developer",
+  title: "Full-Stack Developer | AI Integration Engineer",
   avatar: "/images/my-avatar.png",
   email: "himanshuheda123@gmail.com",
   phone: "+91 7877886406",
@@ -19,39 +19,49 @@ export const personalInfo = {
   ],
 };
 
+export const hero = {
+  headlineLead: "Full-Stack & AI Integration Engineer.",
+  headlineRest: "I build and ship production systems.",
+  subheadline:
+    "Flutter, FastAPI, Python, AWS. Shipped FabVision AI to Google Play (now v20), cut manual processing by 80% for enterprise clients, and integrated WhatsApp/Meta APIs end to end.",
+  availability: "Open to full-time roles",
+};
+
+// Keep these identical to the resume.
+export const metrics = [
+  { value: "80%", label: "less manual processing" },
+  { value: "60 min → under 5 sec", label: "pump selection time" },
+  { value: "v20", label: "live on Google Play" },
+  { value: "100+", label: "app downloads" },
+  { value: "50+", label: "PRs reviewed" },
+];
+
 export const aboutText = [
-  `Hi, I'm Himanshu Heda, a passionate software developer with a strong interest in web development, programming, and cybersecurity. I have hands-on experience with a variety of technologies, including HTML, CSS, JavaScript, PHP, SQL, Python, and Java.`,
-  `I have worked on several projects, including:`,
-  `Step into Style – A shoe e-commerce website that showcases my expertise in both front-end and back-end development.`,
-  `Java-Based Chatting Application – A real-time chatting system built using Java, highlighting my skills in network programming and socket communication.`,
-  `Java-Based Bank Management System (ATM Machine) – A recent project that enhances banking operations. Apart from development, I am actively involved in open-source contributions and technical writing. My research work focuses on cybersecurity, with an ongoing paper titled:`,
-  `"Comprehensive Review of Cybersecurity Vulnerabilities, Threats, and Solutions in the Era of Digital Transformation: Challenges and Strategies for Business Resilience."`,
-  `I continually enhance my skills and have completed certifications in Python Concurrent Programming and Java through Infosys Springboard. Additionally, I'm exploring speech recognition and text-to-speech systems using Python.`,
-  `I am always open to collaborations and innovative projects that drive business growth and digital transformation.`,
-  `📌 "Code is like humor. When you have to explain it, it's bad." – Cory House`,
-  `Feel free to connect with me on LinkedIn or browse through my GitHub to see more of my work!`,
+  `I'm a developer at OctoDo Sol in Noida. I build production systems end to end: Flutter apps, FastAPI and Node.js backends, and the AI and automation layers that connect them to real business workflows. My flagship project, FabVision AI, generates AI model photoshoots for Indian textile manufacturers. I built it solo, and it is live on Google Play (v20) with Razorpay payments.`,
+  `I start from the manual process a team wants gone, then measure the result. That approach cut manual processing by 80% in a work-order system and brought pump selection for a manufacturing client from 60 minutes to under 5 seconds. I have also reviewed 50+ pull requests and mentored 100+ contributors in open-source programs, and co-authored an IEEE paper on phishing URL detection.`,
+  `I completed my MCA at CHRIST (Deemed to be University) in 2026. I'm open to full-time roles as a Flutter or full-stack developer, AI integration engineer or product engineer, at startups, GCCs, and manufacturing or BFSI digital teams.`,
 ];
 
 export const services = [
   {
-    icon: "/images/icon-design.svg",
-    title: "Web design",
-    text: "Creating clean, modern, and responsive UI/UX designs using Figma and front-end technologies.",
+    icon: "/images/icon-app.svg",
+    title: "Mobile & web apps",
+    text: "Flutter apps shipped to Google Play, plus React and Next.js dashboards in TypeScript and Tailwind.",
   },
   {
     icon: "/images/icon-dev.svg",
-    title: "Web development",
-    text: "Building full-stack web applications using HTML, CSS, JavaScript, PHP, React, and SQL databases.",
+    title: "Backends & APIs",
+    text: "FastAPI and Node.js services with Celery and Redis, PostgreSQL and MSSQL, deployed on AWS.",
   },
   {
-    icon: "/images/icon-app.svg",
-    title: "Cybersecurity",
-    text: "Research and implementation of security practices, vulnerability analysis, and digital threat mitigation.",
+    icon: "/images/icon-design.svg",
+    title: "AI integration",
+    text: "Gemini, Claude API and LangChain built into real products, from AI image generation to local multi-agent LLM setups.",
   },
   {
     icon: "/images/icon-photo.svg",
-    title: "Open Source",
-    text: "Active contributor and project admin across multiple open-source programs including GirlScript and SWOC.",
+    title: "Workflow automation",
+    text: "n8n pipelines, WhatsApp / Meta Business API flows and Tally integrations that remove manual work.",
   },
 ];
 
@@ -73,76 +83,76 @@ export const badges = [
   { src: "/badges/GitHub Practices Microsoft.png", alt: "GitHub Practices Microsoft Badge" },
 ];
 
-export const education = [
+export type TimelineEntry = {
+  role: string;
+  org: string;
+  place?: string;
+  period: string;
+  points: string[];
+};
+
+export const experience: TimelineEntry[] = [
   {
-    title: "📚 Christ University (Delhi NCR)",
-    period: "2024 — 2026",
-    text: "Gaining in-depth knowledge of software development, data structures, and cybersecurity, while working on projects in Java, Python, Web Development, and AR/VR technologies. Actively contributing to open-source communities and leading development teams to drive innovation and collaboration.",
+    role: "Developer",
+    org: "OctoDo Sol Pvt Ltd",
+    place: "Noida",
+    period: "Jan 2026 — Present",
+    // TODO(me): replace with 2-3 concrete bullets for this role (which of the case studies belong here).
+    points: [
+      "Building production products and client systems end to end across mobile, backend, AI integration and workflow automation. Selected work is on the Work page.",
+    ],
   },
   {
-    title: "🎓 Vision Group of Commerce, MLSU",
-    period: "2021 — 2024",
-    text: "Developed a strong foundation in programming, databases, and software engineering. Created key projects, including 'Step into Style' (e-commerce site) and a bookstore inventory system. Participated in conferences, enhancing my problem-solving skills.",
+    role: "Python Full-Stack Developer Intern",
+    org: "OctoDo Sol",
+    period: "May 2025 — Jul 2025",
+    points: [
+      "Refactored a hydraulic design system and added Linear Regression, improving cost prediction accuracy by 15%.",
+      "Built n8n SEO automation that cut manual effort by 60%, saving 10+ hours a week.",
+      "Integrated the Semrush API across 5+ client accounts.",
+    ],
   },
   {
-    title: "🏫 Birla Shiksha Kendra",
-    period: "2021",
-    text: "Learned Python programming, which strengthened my logical and problem-solving skills. Developed an early interest in coding, web technologies, and software development.",
-  },
-  {
-    title: "🏫 Birla Shiksha Kendra",
-    period: "2019",
-    text: "Started exploring computer programming through basic C and HTML.",
+    role: "Web Development Intern",
+    org: "CodSoft",
+    period: "Sep 2024 — Oct 2024",
+    points: ["Built responsive web projects with 18% higher engagement and 25% faster page load."],
   },
 ];
 
-export const experience = [
+export const openSource = {
+  title: "Open source",
+  roles:
+    "Project Admin at GirlScript Summer of Code, SWOC and GDSC. Mentor at Kharagpur Open Source Society and Android Club VIT Bhopal.",
+  stats: [
+    { value: "50+", label: "PRs reviewed" },
+    { value: "100+", label: "contributors mentored" },
+    { value: "3+", label: "programs" },
+  ],
+};
+
+export const education = [
   {
-    title: "Project Admin, GirlScript Summer of Code",
-    period: "July 2025 — Present",
-    text: "Leading and managing open-source projects, mentoring contributors, and reviewing PRs to enhance collaboration and learning.",
+    title: "MCA, CHRIST (Deemed to be University)",
+    place: "Delhi NCR",
+    period: "Jul 2024 — Jul 2026",
   },
   {
-    title: "Python Full Stack Developer Intern, OctoDo Solutions",
-    period: "May 2025 — Jul 2025",
-    text: "Research Project Contribution: During my internship, I contributed to the optimization and enhancement of a hydraulic design system. SEO Automation & Semrush: Designed and implemented n8n-based automation pipelines for Off-Page SEO tasks. Automated processes like keyword tracking, backlink monitoring, and competitor analysis through API integrations.",
-  },
-  {
-    title: "Project Admin, Google Developer Student Clubs",
-    period: "Feb 2025 — Mar 2025",
-    text: "Leading and managing open-source projects, mentoring contributors, and reviewing PRs to enhance collaboration and learning.",
-  },
-  {
-    title: "Contributor, Google Developer Groups on Campus - IIIT Kalyan",
-    period: "Jan 2025 — Feb 2025",
-    text: "Actively contributing to open-source projects, collaborating with developers, and participating in community-driven initiatives.",
-  },
-  {
-    title: "Project Admin, Social Winter of Code (SWOC)",
-    period: "Jan 2025 — Feb 2025",
-    text: "Supervising project development, guiding contributors, and ensuring the smooth execution of open-source contributions.",
-  },
-  {
-    title: "Mentor, Kharagpur Open Source Society",
-    period: "Jan 2025 — Feb 2025",
-    text: "Providing mentorship to open-source contributors, reviewing code, and sharing best practices for project development.",
-  },
-  {
-    title: "Contributor, Android Club - VIT Bhopal",
-    period: "Jan 2025 — Feb 2025",
-    text: "Engaging in Android development projects, sharing knowledge, and enhancing mobile app development skills.",
-  },
-  {
-    title: "Open-Source Contributor, GirlScript Summer of Code",
-    period: "Oct 2024 — Nov 2024",
-    text: "Contributing to various open-source projects, improving codebases, and collaborating with fellow developers.",
-  },
-  {
-    title: "Web Developer, CodSoft",
-    period: "Sep 2024 — Oct 2024",
-    text: "During my CodSoft Web Development Internship, I worked on multiple projects, including a responsive portfolio website and a landing page, showcasing my expertise in HTML, CSS & JavaScript.",
+    title: "BCA, Vision Group of Commerce",
+    place: "Chittorgarh",
+    period: "Jul 2021 — Apr 2024",
   },
 ];
+
+export const publication = {
+  title: "Comparative Analysis on Phishing URL Detection using Machine Learning & Deep Learning",
+  venue: "IEEE",
+  year: "2025",
+  coAuthors: "Mudita Sharan and Preety Shoran",
+  // TODO(me): confirm the published accuracy figure (94%+ vs 97.70%) before showing it.
+  // TODO(me): add the DOI / IEEE Xplore link. The link is hidden while this is empty.
+  url: "",
+};
 
 export const skills = [
   { name: "Web Developer", value: 90 },

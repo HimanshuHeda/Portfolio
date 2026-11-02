@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Providers from "@/components/Providers";
 import { personalInfo } from "@/data/portfolio-data";
 import { publicFileExists } from "@/lib/assets";
+import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -14,29 +15,72 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "Himanshu Heda | Full Stack Developer",
+    default: SITE_TITLE,
     template: "%s | Himanshu Heda",
   },
-  description:
-    "Himanshu Heda - Full Stack Developer specializing in Web Development, Java, Python, and Cybersecurity. Based in Noida, India.",
+  description: SITE_DESCRIPTION,
   keywords: [
     "Himanshu Heda",
-    "Full Stack Developer",
-    "Web Development",
-    "Java",
+    "Full-Stack Developer",
+    "AI Integration Engineer",
+    "Flutter Developer",
+    "FastAPI",
     "Python",
-    "Cybersecurity",
-    "Portfolio",
+    "Next.js",
+    "AWS",
+    "Noida",
   ],
-  authors: [{ name: "Himanshu Heda" }],
+  authors: [{ name: personalInfo.name, url: SITE_URL }],
+  creator: personalInfo.name,
   openGraph: {
-    title: "Himanshu Heda | Full Stack Developer",
-    description:
-      "Portfolio of Himanshu Heda – Full Stack Developer, open-source contributor, and cybersecurity enthusiast.",
-    images: ["/images/my-avatar.png"],
     type: "website",
+    locale: "en_IN",
+    url: "/",
+    siteName: personalInfo.name,
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
   },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
+  robots: { index: true, follow: true },
+};
+
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: personalInfo.name,
+  url: SITE_URL,
+  image: `${SITE_URL}${personalInfo.avatar}`,
+  jobTitle: personalInfo.title,
+  email: `mailto:${personalInfo.email}`,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Noida",
+    addressCountry: "IN",
+  },
+  worksFor: { "@type": "Organization", name: "OctoDo Sol Pvt Ltd" },
+  alumniOf: [
+    { "@type": "CollegeOrUniversity", name: "CHRIST (Deemed to be University)" },
+    { "@type": "EducationalOrganization", name: "Vision Group of Commerce" },
+  ],
+  knowsAbout: [
+    "Flutter",
+    "FastAPI",
+    "Python",
+    "AWS",
+    "Next.js",
+    "React",
+    "Node.js",
+    "AI integration",
+    "Workflow automation",
+    "WhatsApp Business API",
+  ],
+  sameAs: personalInfo.socials.map((s) => s.url),
 };
 
 export default function RootLayout({
@@ -47,6 +91,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.variable}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(personJsonLd).replace(/</g, "\\u003c"),
+          }}
+        />
         <Providers>
           <main>
             <Sidebar resumeAvailable={publicFileExists(personalInfo.resumeUrl)} />

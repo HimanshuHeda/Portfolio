@@ -172,6 +172,8 @@ export const portfolioProjects: ProjectItem[] = [
   { title: "Car Sales Analysis", category: "python", image: "/images/project-7.png", url: "https://github.com/HimanshuHeda/Car_Sales_Analysis" },
   { title: "Chatting Application", category: "applications", image: "/images/Project-03.png", url: "https://github.com/HimanshuHeda/Chatting_Application_Java" },
   { title: "Myntra Clone", category: "web development", image: "/images/Blog-03.png", url: "https://github.com/HimanshuHeda/Myntra_Clone" },
+  { title: "Amazon Clone", category: "web development", image: "/images/Blog-01.png", url: "https://himanshuheda.github.io/Amazon_Clone/" },
+  { title: "Tic Tac Toe", category: "web development", image: "/images/blog-5.jpg", url: "https://tic-tac-toe-bice-six-89.vercel.app/" },
 ];
 
 export const designProjects: ProjectItem[] = [
@@ -201,73 +203,6 @@ export const designProjects: ProjectItem[] = [
     image: "/images/Furniture.png",
     url: "https://www.figma.com/design/va4OHqFsbBmuNhVTjpaNvl/Furniture?node-id=0-1&t=SngNE4SN7uWUvycr-1",
     prototypeUrl: "https://www.figma.com/proto/va4OHqFsbBmuNhVTjpaNvl/Furniture?node-id=2-2&p=f&t=VtzuHAE5wX9RUew1-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=2%3A2&show-proto-sidebar=1",
-  },
-];
-
-export type BlogPost = {
-  title: string;
-  category: string;
-  date: string;
-  dateFormatted: string;
-  image: string;
-  text: string;
-  url: string;
-};
-
-export const blogPosts: BlogPost[] = [
-  {
-    title: "Amazon Clone",
-    category: "Web Development",
-    date: "2024-09-26",
-    dateFormatted: "26 Sep 2024",
-    image: "/images/Blog-01.png",
-    text: "A fully responsive frontend project built using HTML, CSS, and JavaScript, replicating the UI and functionality of the Amazon website.",
-    url: "https://himanshuheda.github.io/Amazon_Clone/",
-  },
-  {
-    title: "Step Into Style - A Shoe Website",
-    category: "Web Development",
-    date: "2023-04-01",
-    dateFormatted: "Apr 2023 - Jun 2023",
-    image: "/images/Project-01.png",
-    text: "This project helped me strengthen my web development skills and gave me hands-on experience building a functional e-commerce platform.",
-    url: "https://step-into-style.vercel.app/",
-  },
-  {
-    title: "Multi Step Form",
-    category: "Web Development",
-    date: "2024-10-07",
-    dateFormatted: "07 Oct 2024",
-    image: "/images/Blog-02.png",
-    text: "A user-friendly form with multiple steps, enhancing the UI/UX by breaking down inputs into sections for better navigation and usability.",
-    url: "https://multi-step-form-phi-hazel.vercel.app/",
-  },
-  {
-    title: "Myntra Clone",
-    category: "Web Development",
-    date: "2024-09-30",
-    dateFormatted: "30 Sep 2024",
-    image: "/images/Blog-03.png",
-    text: "A responsive frontend project built using HTML, CSS, and JavaScript, replicating the design and user experience of the Myntra website.",
-    url: "https://himanshuheda.github.io/Myntra_Clone/",
-  },
-  {
-    title: "Tic Tac Toe",
-    category: "JavaScript",
-    date: "2024-09-28",
-    dateFormatted: "Sep 28, 2024",
-    image: "/images/blog-5.jpg",
-    text: "The Tic-Tac-Toe Web Project is a classic two-player game built using HTML, CSS, and JavaScript. It provides an interactive and engaging experience.",
-    url: "https://tic-tac-toe-bice-six-89.vercel.app/",
-  },
-  {
-    title: "Zip Tales",
-    category: "AI / Web",
-    date: "2025-06-28",
-    dateFormatted: "June 28, 2025",
-    image: "/images/project-5.png",
-    text: "AI-powered news verification platform that filters misinformation and provides community-verified credibility scores for authentic journalism.",
-    url: "https://ziptales.netlify.app/",
   },
 ];
 

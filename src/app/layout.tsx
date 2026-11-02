@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+import Sidebar from "@/components/Sidebar";
+import Navbar from "@/components/Navbar";
+import Providers from "@/components/Providers";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -9,7 +12,10 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Himanshu Heda | Full Stack Developer",
+  title: {
+    default: "Himanshu Heda | Full Stack Developer",
+    template: "%s | Himanshu Heda",
+  },
   description:
     "Himanshu Heda - Full Stack Developer specializing in Web Development, Java, Python, and Cybersecurity. Based in Noida, India.",
   keywords: [
@@ -38,7 +44,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={poppins.variable}>{children}</body>
+      <body className={poppins.variable}>
+        <Providers>
+          <main>
+            <Sidebar />
+            <div className="main-content">
+              <Navbar />
+              {children}
+            </div>
+          </main>
+        </Providers>
+      </body>
     </html>
   );
 }

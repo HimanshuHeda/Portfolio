@@ -4,7 +4,7 @@
 export const personalInfo = {
   name: "Himanshu Heda",
   title: "Full-Stack Developer | AI Integration Engineer",
-  avatar: "/images/my-avatar.png",
+  avatar: "/images/my-avatar.webp",
   email: "himanshuheda123@gmail.com",
   // City only. Phone and full address stay on the resume PDF, not in page HTML.
   location: "Noida, India",
@@ -61,23 +61,47 @@ export const services = [
   },
 ];
 
-export const certifications = [
-  { src: "/certifications/ACWOC.png", alt: "AcWoC Certificate" },
-  { src: "/certifications/infosys_java.png", alt: "Infosys Java Certificate" },
-  { src: "/certifications/ReactJS.png", alt: "ReactJS Certificate" },
-  { src: "/certifications/International Conference ICIEGL.jpg", alt: "International Conference ICIEGL Certificate" },
-  { src: "/certifications/POWER BI.jpg", alt: "Power BI Certificate" },
-  { src: "/certifications/TABLEAU.jpg", alt: "Tableau Certificate" },
-  { src: "/certifications/Python_HackerRank.png", alt: "Python HackerRank Certificate" },
+export type ProofImage = {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  /** Verification URL. Leave unset rather than linking to "#". */
+  href?: string;
+};
+
+// TODO(me): add verification links (Credly / issuer pages) where they exist.
+export const certifications: ProofImage[] = [
+  { src: "/certifications/acwoc.webp", alt: "AcWoC certificate", width: 480, height: 339 },
+  { src: "/certifications/infosys-java.webp", alt: "Infosys Springboard Java certificate", width: 480, height: 338 },
+  { src: "/certifications/infosys-reactjs.webp", alt: "Infosys Springboard ReactJS certificate", width: 480, height: 339 },
+  { src: "/certifications/iciegl-conference.webp", alt: "International Conference ICIEGL certificate", width: 480, height: 349 },
+  { src: "/certifications/power-bi.webp", alt: "Power BI certificate (RCPL)", width: 480, height: 335 },
+  { src: "/certifications/tableau.webp", alt: "Tableau certificate (RCPL)", width: 480, height: 336 },
+  { src: "/certifications/python-hackerrank.webp", alt: "Python certificate, HackerRank", width: 480, height: 360 },
 ];
 
-export const badges = [
-  { src: "/badges/AcWoC Badge.png", alt: "AcWoC Badge" },
-  { src: "/badges/networking-basics.png", alt: "Cisco Networking Basics Badge" },
-  { src: "/badges/AI_IBM.jpg", alt: "IBM AI Badge" },
-  { src: "/badges/Microsoft 365 Copilot.png", alt: "Microsoft 365 Copilot Badge" },
-  { src: "/badges/GitHub Practices Microsoft.png", alt: "GitHub Practices Microsoft Badge" },
+export const badges: ProofImage[] = [
+  {
+    src: "/badges/ibm-ai-fundamentals.webp",
+    alt: "IBM SkillsBuild AI Fundamentals badge",
+    width: 480,
+    height: 480,
+    href: "https://www.credly.com/go/l4rZkEc8LrrX3I6dyYnCXA",
+  },
+  { src: "/badges/acwoc.webp", alt: "AcWoC badge", width: 480, height: 480 },
+  { src: "/badges/cisco-networking-basics.webp", alt: "Cisco Networking Basics badge", width: 480, height: 480 },
+  { src: "/badges/microsoft-365-copilot.webp", alt: "Microsoft 365 Copilot badge", width: 480, height: 372 },
+  { src: "/badges/github-practices-microsoft.webp", alt: "Microsoft GitHub practices badge", width: 480, height: 371 },
 ];
+
+export type RoleProject = {
+  name: string;
+  text: string;
+  /** Case study page, if there is one. */
+  href?: string;
+  inProgress?: boolean;
+};
 
 export type TimelineEntry = {
   role: string;
@@ -85,6 +109,8 @@ export type TimelineEntry = {
   place?: string;
   period: string;
   points: string[];
+  projects?: RoleProject[];
+  additional?: string;
 };
 
 export const experience: TimelineEntry[] = [
@@ -93,10 +119,48 @@ export const experience: TimelineEntry[] = [
     org: "OctoDo Sol Pvt Ltd",
     place: "Noida",
     period: "Jan 2026 — Present",
-    // TODO(me): replace with 2-3 concrete bullets for this role (which of the case studies belong here).
-    points: [
-      "Building production products and client systems end to end across mobile, backend, AI integration and workflow automation. Selected work is on the Work page.",
+    points: [],
+    projects: [
+      {
+        name: "FabVision AI",
+        text: "built solo and shipped to Google Play (v20, 100+ downloads, Razorpay payments live). Flutter, FastAPI, Celery, Redis on AWS.",
+        href: "/work/fabvision-ai",
+      },
+      {
+        name: "WorkOrder Lifecycle Management System",
+        text: "cut manual processing by 80% with automated validation and duplicate detection. React, Node.js, MSSQL, n8n.",
+        href: "/work/workorder-lifecycle",
+      },
+      {
+        name: "CES Pump Selector",
+        text: "pump selection for a manufacturing client from 60 minutes to under 5 seconds, 100% accurate against manufacturer datasheets.",
+        href: "/work/ces-pump-selector",
+      },
+      {
+        name: "n8n + Tally order-to-cash automation",
+        text: "ledger creation and invoicing automated through Tally.",
+        href: "/work/workorder-lifecycle",
+      },
+      {
+        name: "Meta / WhatsApp Business API automation",
+        text: "from business verification to live deployment across 3 numbers/projects, with automated demo scheduling and reminders.",
+        href: "/work/whatsapp-business-automation",
+      },
+      {
+        name: "Payment Tracker",
+        text: "one dashboard for payments, invoices and GST across all OctoDo products.",
+        href: "/work/payment-tracker",
+        inProgress: true,
+      },
+      {
+        name: "Sewar pump research",
+        text: "comparing DP, CMA-ES, GA, MPSO, ACO and GNN approaches for a sewer-network pump plugin.",
+        href: "/work/sewar-pump-research",
+        inProgress: true,
+      },
     ],
+    additional:
+      "Microsoft 365 email-automation agent, listmonk email campaigns on Amazon SES, an image-to-text converter, and website builds for multiple clients.",
   },
   {
     role: "Python Full-Stack Developer Intern",
@@ -145,68 +209,66 @@ export const publication = {
   venue: "IEEE",
   year: "2025",
   coAuthors: "Mudita Sharan and Preety Shoran",
-  // TODO(me): confirm the published accuracy figure (94%+ vs 97.70%) before showing it.
-  // TODO(me): add the DOI / IEEE Xplore link. The link is hidden while this is empty.
-  url: "",
+  // Published figure confirmed by me (the resume PDF still says "over 94%").
+  result: "97.70% accuracy",
+  links: [
+    { label: "IEEE Xplore", href: "https://ieeexplore.ieee.org/document/11507313" },
+    {
+      label: "ResearchGate",
+      href: "https://www.researchgate.net/publication/404749872_Comparative_Analysis_using_on_Phishing_URL's_using_Machine_Learning_and_Deep_Learning",
+    },
+  ],
 };
 
-export const skills = [
-  { name: "Web Developer", value: 90 },
-  { name: "Java Developer", value: 80 },
-  { name: "Python", value: 70 },
-  { name: "Cloud Computing", value: 80 },
-  { name: "Cyber Security", value: 80 },
+// Grouped tags, no percentages. Ordered by what I use daily.
+export const skillGroups = [
+  { name: "Frontend & Mobile", items: ["Flutter", "React", "Next.js", "TypeScript", "Tailwind CSS"] },
+  { name: "Backend", items: ["FastAPI", "Node.js", "Python", "REST APIs", "Celery", "Redis"] },
+  { name: "AI & Automation", items: ["Gemini", "Claude API", "LangChain", "PyTorch", "n8n"] },
+  { name: "Cloud & DevOps", items: ["AWS (S3, EC2)", "GCP", "Firebase", "Docker", "GitHub Actions"] },
+  { name: "Data", items: ["PostgreSQL", "MSSQL", "MySQL", "pgvector"] },
 ];
 
-export type ProjectItem = {
+// TODO(me): add verification links for the items that have one; items without a link show as plain text.
+export const achievements: { title: string; issuer?: string; date?: string; href?: string }[] = [
+  { title: "Finalist, hackathon", issuer: "ABV-IIITM Gwalior", date: "Jun 2025" },
+  { title: "AWS Academy Cloud Foundations", issuer: "AWS Academy" },
+  { title: "Google Cloud Arcade Facilitator", issuer: "Google Cloud" },
+  { title: "Gen AI Academy", issuer: "Google Cloud" },
+  { title: "AI Fundamentals", issuer: "IBM SkillsBuild", href: "https://www.credly.com/go/l4rZkEc8LrrX3I6dyYnCXA" },
+  { title: "Artificial Intelligence (VIUP111)", issuer: "Intel" },
+  { title: "Python, Java and ReactJS", issuer: "Infosys Springboard" },
+  { title: "Power BI and Tableau", issuer: "RCPL" },
+];
+
+export type DesignItem = {
   title: string;
-  category: string;
   image: string;
   url: string;
   prototypeUrl?: string;
 };
 
-export const portfolioCategories = ["All", "Web design", "Applications", "Web development", "IOT", "Python"];
-
-export const portfolioProjects: ProjectItem[] = [
-  { title: "Step Into Style", category: "web development", image: "/images/Project-01.png", url: "https://github.com/HimanshuHeda/step_into_style" },
-  { title: "Multi Step Form", category: "web development", image: "/images/Blog-02.png", url: "https://github.com/HimanshuHeda/Multi_Step_Form" },
-  { title: "TextUtil", category: "web design", image: "/images/Project-04.png", url: "https://github.com/HimanshuHeda/TextUtil_React" },
-  { title: "Bank Management System", category: "applications", image: "/images/Project-02.png", url: "https://github.com/HimanshuHeda/Bank_Management_System_Java" },
-  { title: "Zip Tales", category: "web design", image: "/images/project-5.png", url: "https://github.com/HimanshuHeda/Zip_Tales" },
-  { title: "Smart Meter", category: "iot", image: "/images/project-6.png", url: "https://github.com/HimanshuHeda/Smart_Energy_Meter" },
-  { title: "Car Sales Analysis", category: "python", image: "/images/project-7.png", url: "https://github.com/HimanshuHeda/Car_Sales_Analysis" },
-  { title: "Chatting Application", category: "applications", image: "/images/Project-03.png", url: "https://github.com/HimanshuHeda/Chatting_Application_Java" },
-  { title: "Myntra Clone", category: "web development", image: "/images/Blog-03.png", url: "https://github.com/HimanshuHeda/Myntra_Clone" },
-  { title: "Amazon Clone", category: "web development", image: "/images/Blog-01.png", url: "https://himanshuheda.github.io/Amazon_Clone/" },
-  { title: "Tic Tac Toe", category: "web development", image: "/images/blog-5.jpg", url: "https://tic-tac-toe-bice-six-89.vercel.app/" },
-];
-
-export const designProjects: ProjectItem[] = [
+export const designProjects: DesignItem[] = [
   {
     title: "Christ",
-    category: "figma",
-    image: "/images/Christ.png",
+    image: "/images/design/christ.webp",
     url: "https://www.figma.com/design/RukbRCyfreN3hBKfXRQrE4/Christ?node-id=0-1&t=qSn7xMOzrWpyQSTg-1",
   },
   {
     title: "International Bank",
-    category: "figma",
-    image: "/images/Bank.png",
+    image: "/images/design/international-bank.webp",
     url: "https://www.figma.com/design/mjWjrfBlldX8C5m3klqLPf/International-Bank?node-id=0-1&t=kaB4F0J3f7gRWThW-1",
     prototypeUrl: "https://www.figma.com/proto/mjWjrfBlldX8C5m3klqLPf/International-Bank?node-id=2-2&p=f&t=VtzuHAE5wX9RUew1-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=2%3A2&show-proto-sidebar=1",
   },
   {
     title: "Indian Manuscripts",
-    category: "figma",
-    image: "/images/Manuscripts.png",
+    image: "/images/design/indian-manuscripts.webp",
     url: "https://www.figma.com/design/Uy6Sc3AjfrXk1fgi84dVUG/Indian-Manuscripts?node-id=0-1&t=jCRlHefpmDfN48Rc-1",
     prototypeUrl: "https://www.figma.com/proto/Uy6Sc3AjfrXk1fgi84dVUG/Indian-Manuscripts?node-id=2-2&p=f&t=VtzuHAE5wX9RUew1-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=2%3A2&show-proto-sidebar=1",
   },
   {
     title: "Furniture",
-    category: "figma",
-    image: "/images/Furniture.png",
+    image: "/images/design/furniture.webp",
     url: "https://www.figma.com/design/va4OHqFsbBmuNhVTjpaNvl/Furniture?node-id=0-1&t=SngNE4SN7uWUvycr-1",
     prototypeUrl: "https://www.figma.com/proto/va4OHqFsbBmuNhVTjpaNvl/Furniture?node-id=2-2&p=f&t=VtzuHAE5wX9RUew1-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=2%3A2&show-proto-sidebar=1",
   },

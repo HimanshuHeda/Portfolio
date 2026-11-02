@@ -1762,3 +1762,27 @@ textarea.form-input::-webkit-resizer { display: none; }
   .cs-grid { grid-template-columns: 1fr 1fr; }
   .cs-card-featured { grid-column: 1 / -1; }
 }
+
+/* ══════════════════════════════════════
+   RESUME: skills tags, achievements; ABOUT: proof strips
+   ══════════════════════════════════════ */
+
+.skill-groups { display: grid; gap: 14px; margin-left: 45px; }
+.skill-group-name {
+  color: var(--white-2);
+  font-size: var(--fs-7);
+  font-weight: var(--fw-500);
+  margin-bottom: 6px;
+}
+
+.achievement-list { display: grid; gap: 8px; margin-left: 45px; }
+.achievement-title { display: inline; color: var(--white-2); }
+
+.clients-item img { max-height: 120px; object-fit: contain; }
+.clients-item a { display: block; }
+.clients-list:focus-visible { outline: 2px solid var(--orange-yellow-crayola); outline-offset: 4px; }
+
+@media (min-width: 580px) {
+  .skill-groups,
+  .achievement-list { margin-left: 65px; }
+}

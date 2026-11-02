@@ -191,16 +191,17 @@ export const caseStudies: CaseStudy[] = [
     status: "Open source",
     context: "Open source",
     problem:
-      "Misinformation spreads faster than corrections. Zip Tales filters it and gives news items community-verified credibility scores.",
+      "Misinformation spreads faster than corrections. Zip Tales gives every article an AI credibility score and lets readers vote on it, so unreliable stories stand out.",
     role: "Owner of the open-source project on GitHub.",
-    // TODO(me): confirm the stack. GitHub reports TypeScript; the resume lists Python, Gemini AI, Blockchain and Streamlit.
-    stack: ["TypeScript", "Gemini AI", "Blockchain"],
+    // Stack taken from the repo's package.json, Supabase migrations, netlify.toml and source (Nov 2026).
+    stack: ["TypeScript", "React", "Vite", "Tailwind CSS", "Supabase", "Google Gemini API", "Netlify"],
     architecture: [
-      { label: "News item", detail: "Submitted for checking." },
-      { label: "AI check", detail: "Gemini-based analysis." },
-      { label: "Community verification", detail: "Crowd-sourced validation." },
-      { label: "Credibility score", detail: "Shown with the item." },
-      { label: "Blockchain record", detail: "Tamper-proof verification history." },
+      { label: "React front end", detail: "TypeScript, Vite and Tailwind CSS, hosted on Netlify." },
+      { label: "Supabase", detail: "Auth plus Postgres tables for users, articles, votes and saved articles." },
+      { label: "Gemini analysis", detail: "Scores each submitted article's credibility and writes a summary." },
+      { label: "Community votes", detail: "Readers upvote or downvote each article." },
+      { label: "Verified badge", detail: "Articles scoring 70 or more are marked verified." },
+      { label: "ZipBot", detail: "Gemini-powered chat that answers questions about the news." },
     ],
     results: [
       { value: "11", label: "GitHub stars" },

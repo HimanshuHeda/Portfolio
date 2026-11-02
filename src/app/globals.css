@@ -1412,3 +1412,39 @@ textarea.form-input::-webkit-resizer { display: none; }
 /* Proper nouns and paper titles: keep the source casing */
 .timeline-item-title,
 .service-item-title { text-transform: none; }
+
+/* ══════════════════════════════════════
+   SHARED: inline links, status pills
+   ══════════════════════════════════════ */
+
+.inline-link {
+  display: inline;
+  color: var(--orange-yellow-crayola);
+  font-weight: var(--fw-500);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.inline-link:hover { color: var(--white-2); }
+
+.status-pill {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 1px 8px;
+  border-radius: 20px;
+  border: 1px solid var(--vegas-gold);
+  color: var(--orange-yellow-crayola);
+  font-size: var(--fs-8);
+  font-weight: var(--fw-500);
+  vertical-align: middle;
+}
+
+.additional-label { color: var(--white-2); font-weight: var(--fw-500); }
+
+.publication-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 6px;
+}

@@ -79,12 +79,22 @@ export const badges = [
   { src: "/badges/GitHub Practices Microsoft.png", alt: "GitHub Practices Microsoft Badge" },
 ];
 
+export type RoleProject = {
+  name: string;
+  text: string;
+  /** Case study page, if there is one. */
+  href?: string;
+  inProgress?: boolean;
+};
+
 export type TimelineEntry = {
   role: string;
   org: string;
   place?: string;
   period: string;
   points: string[];
+  projects?: RoleProject[];
+  additional?: string;
 };
 
 export const experience: TimelineEntry[] = [
@@ -93,10 +103,48 @@ export const experience: TimelineEntry[] = [
     org: "OctoDo Sol Pvt Ltd",
     place: "Noida",
     period: "Jan 2026 — Present",
-    // TODO(me): replace with 2-3 concrete bullets for this role (which of the case studies belong here).
-    points: [
-      "Building production products and client systems end to end across mobile, backend, AI integration and workflow automation. Selected work is on the Work page.",
+    points: [],
+    projects: [
+      {
+        name: "FabVision AI",
+        text: "built solo and shipped to Google Play (v20, 100+ downloads, Razorpay payments live). Flutter, FastAPI, Celery, Redis on AWS.",
+        href: "/work/fabvision-ai",
+      },
+      {
+        name: "WorkOrder Lifecycle Management System",
+        text: "cut manual processing by 80% with automated validation and duplicate detection. React, Node.js, MSSQL, n8n.",
+        href: "/work/workorder-lifecycle",
+      },
+      {
+        name: "CES Pump Selector",
+        text: "pump selection for a manufacturing client from 60 minutes to under 5 seconds, 100% accurate against manufacturer datasheets.",
+        href: "/work/ces-pump-selector",
+      },
+      {
+        name: "n8n + Tally order-to-cash automation",
+        text: "ledger creation and invoicing automated through Tally.",
+        href: "/work/workorder-lifecycle",
+      },
+      {
+        name: "Meta / WhatsApp Business API automation",
+        text: "from business verification to live deployment across 3 numbers/projects, with automated demo scheduling and reminders.",
+        href: "/work/whatsapp-business-automation",
+      },
+      {
+        name: "Payment Tracker",
+        text: "one dashboard for payments, invoices and GST across all OctoDo products.",
+        href: "/work/payment-tracker",
+        inProgress: true,
+      },
+      {
+        name: "Sewar pump research",
+        text: "comparing DP, CMA-ES, GA, MPSO, ACO and GNN approaches for a sewer-network pump plugin.",
+        href: "/work/sewar-pump-research",
+        inProgress: true,
+      },
     ],
+    additional:
+      "Microsoft 365 email-automation agent, listmonk email campaigns on Amazon SES, an image-to-text converter, and website builds for multiple clients.",
   },
   {
     role: "Python Full-Stack Developer Intern",
@@ -145,9 +193,15 @@ export const publication = {
   venue: "IEEE",
   year: "2025",
   coAuthors: "Mudita Sharan and Preety Shoran",
-  // TODO(me): confirm the published accuracy figure (94%+ vs 97.70%) before showing it.
-  // TODO(me): add the DOI / IEEE Xplore link. The link is hidden while this is empty.
-  url: "",
+  // Published figure confirmed by me (the resume PDF still says "over 94%").
+  result: "97.70% accuracy",
+  links: [
+    { label: "IEEE Xplore", href: "https://ieeexplore.ieee.org/document/11507313" },
+    {
+      label: "ResearchGate",
+      href: "https://www.researchgate.net/publication/404749872_Comparative_Analysis_using_on_Phishing_URL's_using_Machine_Learning_and_Deep_Learning",
+    },
+  ],
 };
 
 export const skills = [

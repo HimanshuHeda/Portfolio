@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   IoBookOutline,
@@ -90,6 +91,24 @@ export default function ResumeSection() {
                 {item.points.map((p) => (
                   <li key={p} className="timeline-text">{p}</li>
                 ))}
+                {item.projects?.map((p) => (
+                  <li key={p.name} className="timeline-text">
+                    {p.href ? (
+                      <Link href={p.href} className="inline-link">{p.name}</Link>
+                    ) : (
+                      <strong>{p.name}</strong>
+                    )}
+                    {p.inProgress && <span className="status-pill">In progress</span>}
+                    {": "}
+                    {p.text}
+                  </li>
+                ))}
+                {item.additional && (
+                  <li className="timeline-text">
+                    <strong className="additional-label">Additional contributions:</strong>{" "}
+                    {item.additional}
+                  </li>
+                )}
               </ul>
             </motion.li>
           ))}
@@ -141,18 +160,23 @@ export default function ResumeSection() {
         <ol className="timeline-list">
           <li className="timeline-item">
             <h3 className="h4 timeline-item-title publication-title">
-              {publication.url ? (
-                <a href={publication.url} target="_blank" rel="noopener noreferrer">
-                  {publication.title}
-                </a>
-              ) : (
-                publication.title
-              )}
+              <a href={publication.links[0].href} target="_blank" rel="noopener noreferrer">
+                {publication.title}
+              </a>
             </h3>
             <span>
               {publication.venue}, {publication.year}
             </span>
-            <p className="timeline-text">With {publication.coAuthors}.</p>
+            <p className="timeline-text">
+              {publication.result}. With {publication.coAuthors}.
+            </p>
+            <p className="timeline-text publication-links">
+              {publication.links.map((l) => (
+                <a key={l.href} href={l.href} target="_blank" rel="noopener noreferrer" className="inline-link">
+                  {l.label}
+                </a>
+              ))}
+            </p>
           </li>
         </ol>
       </section>

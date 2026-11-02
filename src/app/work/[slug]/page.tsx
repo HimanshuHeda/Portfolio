@@ -6,6 +6,7 @@ import { IoArrowBack, IoArrowForward, IoOpenOutline } from "react-icons/io5";
 import ArchitectureDiagram from "@/components/ArchitectureDiagram";
 import StatusPill from "@/components/StatusPill";
 import { caseStudies, getCaseStudy } from "@/data/case-studies";
+import { pageSocial } from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -22,6 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: study.title,
     description: study.summary,
     alternates: { canonical: `/work/${study.slug}` },
+    ...pageSocial(study.title, study.summary, `/work/${study.slug}`),
   };
 }
 

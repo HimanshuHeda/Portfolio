@@ -6,16 +6,12 @@ export const personalInfo = {
   title: "Full-Stack Developer | AI Integration Engineer",
   avatar: "/images/my-avatar.png",
   email: "himanshuheda123@gmail.com",
-  phone: "+91 7877886406",
-  birthday: "1 July, 2003",
-  location: "Noida, Sector 62, India",
-  resumeUrl: "/resume/HimanshuHeda.pdf",
+  // City only. Phone and full address stay on the resume PDF, not in page HTML.
+  location: "Noida, India",
+  resumeUrl: "/assets/Resume/Himanshu_Heda_Resume.pdf",
   socials: [
     { name: "GitHub", url: "https://github.com/HimanshuHeda", icon: "github" },
     { name: "LinkedIn", url: "https://www.linkedin.com/in/himanshu-heda/", icon: "linkedin" },
-    { name: "Twitter", url: "https://x.com/HimanshuHe66960", icon: "twitter" },
-    { name: "Instagram", url: "https://www.instagram.com/__himanshu_heda/", icon: "instagram" },
-    { name: "Facebook", url: "https://www.facebook.com/himanshu.heda.50", icon: "facebook" },
   ],
 };
 
@@ -215,8 +211,3 @@ export const designProjects: ProjectItem[] = [
     prototypeUrl: "https://www.figma.com/proto/va4OHqFsbBmuNhVTjpaNvl/Furniture?node-id=2-2&p=f&t=VtzuHAE5wX9RUew1-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=2%3A2&show-proto-sidebar=1",
   },
 ];
-
-export const mapEmbedUrl =
-  "https://www.openstreetmap.org/export/embed.html?bbox=77.355%2C28.615%2C77.385%2C28.645&layer=mapnik&marker=28.630%2C77.370";
-
-export const formspreeUrl = "https://formspree.io/f/YOUR_FORM_ID";

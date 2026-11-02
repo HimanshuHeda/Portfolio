@@ -29,7 +29,7 @@ export default function Hero() {
       </ul>
 
       <div className="hero-actions">
-        {/* TODO(me): add public/assets/Resume/Himanshu_Heda_Resume.pdf; the button stays hidden until it exists. */}
+        {/* TODO(me): add public/assets/Resume/Himanshu_Heda_Resume.pdf (without the client name); the button stays hidden until it exists. */}
         {hasResume && (
           <a href={personalInfo.resumeUrl} download className="btn btn-primary">
             <IoCloudDownloadOutline aria-hidden="true" />

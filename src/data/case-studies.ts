@@ -211,7 +211,7 @@ export const caseStudies: CaseStudy[] = [
       { label: "Live site", href: "https://ziptales.netlify.app/" },
       { label: "GitHub", href: "https://github.com/HimanshuHeda/Zip_Tales" },
     ],
-    image: { src: "/images/project-5.png", alt: "Zip Tales home page", width: 2559, height: 1468 },
+    image: { src: "/images/work/zip-tales.webp", alt: "Zip Tales home page", width: 1280, height: 734 },
   },
 ];
 

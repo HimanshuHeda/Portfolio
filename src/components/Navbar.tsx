@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion } from "framer-motion";
 
 const pages = [
   { label: "About", href: "/" },
@@ -31,13 +30,6 @@ export default function Navbar() {
                 aria-current={active ? "page" : undefined}
               >
                 {page.label}
-                {active && (
-                  <motion.span
-                    className="navbar-active-indicator"
-                    layoutId="navbar-indicator"
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                  />
-                )}
               </Link>
             </li>
           );

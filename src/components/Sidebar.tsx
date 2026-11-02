@@ -1,41 +1,40 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useSyncExternalStore } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   IoMailOutline,
-  IoPhonePortraitOutline,
-  IoCalendarOutline,
   IoLocationOutline,
   IoCloudDownloadOutline,
   IoChevronDown,
   IoLogoGithub,
   IoLogoLinkedin,
-  IoLogoTwitter,
-  IoLogoInstagram,
-  IoLogoFacebook,
 } from "react-icons/io5";
 import { personalInfo } from "@/data/portfolio-data";
 
 const socialIconMap: Record<string, React.ReactNode> = {
   github: <IoLogoGithub />,
   linkedin: <IoLogoLinkedin />,
-  twitter: <IoLogoTwitter />,
-  instagram: <IoLogoInstagram />,
-  facebook: <IoLogoFacebook />,
 };
 
-export default function Sidebar() {
-  const [expanded, setExpanded] = useState(false);
+const DESKTOP_QUERY = "(min-width: 1250px)";
 
-  useEffect(() => {
-    const mq = window.matchMedia("(min-width: 1250px)");
-    setExpanded(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setExpanded(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
+function subscribeDesktop(onChange: () => void) {
+  const mq = window.matchMedia(DESKTOP_QUERY);
+  mq.addEventListener("change", onChange);
+  return () => mq.removeEventListener("change", onChange);
+}
+
+export default function Sidebar({ resumeAvailable }: { resumeAvailable: boolean }) {
+  // Contacts are always open on wide screens; elsewhere the user toggles them.
+  const isDesktop = useSyncExternalStore(
+    subscribeDesktop,
+    () => window.matchMedia(DESKTOP_QUERY).matches,
+    () => false
+  );
+  const [toggled, setToggled] = useState<boolean | null>(null);
+  const expanded = toggled ?? isDesktop;
 
   return (
     <motion.aside
@@ -60,23 +59,20 @@ export default function Sidebar() {
         </motion.figure>
 
         <div className="info-content">
-          <motion.p
-            className="name"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.3 }}
-          >
-            {personalInfo.name}
-          </motion.p>
+          <p className="name">{personalInfo.name}</p>
           <p className="title">{personalInfo.title}</p>
         </div>
 
         <button
           className="info_more-btn"
-          onClick={() => setExpanded(!expanded)}
+          onClick={() => setToggled(!expanded)}
+          aria-expanded={expanded}
+          aria-controls="sidebar-contacts"
+          aria-label={expanded ? "Hide contacts" : "Show contacts"}
         >
           <span>{expanded ? "Hide Contacts" : "Show Contacts"}</span>
           <IoChevronDown
+            aria-hidden="true"
             style={{
               transform: expanded ? "rotate(180deg)" : "rotate(0deg)",
               transition: "transform 0.3s ease",
@@ -85,9 +81,10 @@ export default function Sidebar() {
         </button>
       </div>
 
-      <AnimatePresence>
+      <AnimatePresence initial={false}>
         {expanded && (
           <motion.div
+            id="sidebar-contacts"
             className="sidebar-info_more"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
@@ -98,83 +95,41 @@ export default function Sidebar() {
             <div className="separator" />
 
             <ul className="contacts-list">
-              <ContactItem
-                icon={<IoMailOutline />}
-                title="Email"
-                delay={0}
-              >
-                <a
-                  href={`mailto:${personalInfo.email}`}
-                  className="contact-link"
-                >
+              <ContactItem icon={<IoMailOutline />} title="Email">
+                <a href={`mailto:${personalInfo.email}`} className="contact-link">
                   {personalInfo.email}
                 </a>
               </ContactItem>
 
-              <ContactItem
-                icon={<IoPhonePortraitOutline />}
-                title="Phone"
-                delay={0.08}
-              >
-                <a
-                  href={`tel:${personalInfo.phone.replace(/\s/g, "")}`}
-                  className="contact-link"
-                >
-                  {personalInfo.phone}
-                </a>
-              </ContactItem>
-
-              <ContactItem
-                icon={<IoCalendarOutline />}
-                title="Birthday"
-                delay={0.16}
-              >
-                <time dateTime="2003-07-01">{personalInfo.birthday}</time>
-              </ContactItem>
-
-              <ContactItem
-                icon={<IoLocationOutline />}
-                title="Location"
-                delay={0.24}
-              >
+              <ContactItem icon={<IoLocationOutline />} title="Location">
                 <address>{personalInfo.location}</address>
               </ContactItem>
 
-              <ContactItem
-                icon={<IoCloudDownloadOutline />}
-                title="Resume"
-                delay={0.32}
-              >
-                <a
-                  href={personalInfo.resumeUrl}
-                  download
-                  className="contact-link"
-                >
-                  Click Here
-                </a>
-              </ContactItem>
+              {/* TODO(me): add public/assets/Resume/Himanshu_Heda_Resume.pdf; this item stays hidden until it exists. */}
+              {resumeAvailable && (
+                <ContactItem icon={<IoCloudDownloadOutline />} title="Resume">
+                  <a href={personalInfo.resumeUrl} download className="contact-link">
+                    Download PDF
+                  </a>
+                </ContactItem>
+              )}
             </ul>
 
             <div className="separator" />
 
             <ul className="social-list">
-              {personalInfo.socials.map((s, i) => (
-                <motion.li
-                  key={s.name}
-                  className="social-item"
-                  initial={{ opacity: 0, scale: 0.6 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.3, delay: i * 0.07 }}
-                >
+              {personalInfo.socials.map((s) => (
+                <li key={s.name} className="social-item">
                   <a
                     href={s.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="social-link"
+                    aria-label={s.name}
                   >
                     {socialIconMap[s.icon]}
                   </a>
-                </motion.li>
+                </li>
               ))}
             </ul>
           </motion.div>
@@ -187,26 +142,19 @@ export default function Sidebar() {
 function ContactItem({
   icon,
   title,
-  delay,
   children,
 }: {
   icon: React.ReactNode;
   title: string;
-  delay: number;
   children: React.ReactNode;
 }) {
   return (
-    <motion.li
-      className="contact-item"
-      initial={{ opacity: 0, x: -25 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.35, delay }}
-    >
-      <div className="icon-box">{icon}</div>
+    <li className="contact-item">
+      <div className="icon-box" aria-hidden="true">{icon}</div>
       <div className="contact-info">
         <p className="contact-title">{title}</p>
         {children}
       </div>
-    </motion.li>
+    </li>
   );
 }

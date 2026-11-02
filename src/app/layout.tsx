@@ -3,6 +3,8 @@ import { Poppins } from "next/font/google";
 import Sidebar from "@/components/Sidebar";
 import Navbar from "@/components/Navbar";
 import Providers from "@/components/Providers";
+import { personalInfo } from "@/data/portfolio-data";
+import { publicFileExists } from "@/lib/assets";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -47,7 +49,7 @@ export default function RootLayout({
       <body className={poppins.variable}>
         <Providers>
           <main>
-            <Sidebar />
+            <Sidebar resumeAvailable={publicFileExists(personalInfo.resumeUrl)} />
             <div className="main-content">
               <Navbar />
               {children}
